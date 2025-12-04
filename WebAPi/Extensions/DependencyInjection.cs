@@ -1,4 +1,6 @@
-﻿using Infrastructure.Context;
+﻿using Application;
+using Infrastructure.Context;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebAPi.Extensions;
@@ -17,6 +19,18 @@ public static class DependencyInjection
         return services;
     }
 
+    public static IServiceCollection AddApplication(this IServiceCollection services)
+    {
+
+        services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(typeof(ApplicationAssemblyReference).Assembly); // Não ter que registrar os Hanlders no container de DI
+        });
+
+
+        return services;
+    }
+
     public static IServiceCollection AddPresentation(this IServiceCollection services)
     {
 
@@ -27,3 +41,4 @@ public static class DependencyInjection
         return services;
     }
 }
+

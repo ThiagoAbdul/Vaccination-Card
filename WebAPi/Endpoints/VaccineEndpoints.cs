@@ -1,4 +1,10 @@
-﻿namespace WebAPi.Endpoints;
+﻿using Application.Vaccines.Commands.CreateVaccine;
+using Application.Vaccines.Responses;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using WebAPi.Extensions;
+
+namespace WebAPi.Endpoints;
 
 public static class VaccineEndpoints
 {
@@ -12,9 +18,11 @@ public static class VaccineEndpoints
 
 
 
-        group.MapGet("/", () =>
+        group.MapPost("/", async ([FromBody] CreateVaccineCommand command, [FromServices] IMediator mediator) =>
         {
-            return Results.Ok(new[] { "Vaccine A", "Vaccine B", "Vaccine C" });
+            var result = await mediator.Send(command);
+            if(result.IsSuccess) return Results.Created($"/api/vaccines/{result.Value!.Id}", result.Value);
+            return result.ToHttpResult();
         })
         .WithName("GetVaccines");
 

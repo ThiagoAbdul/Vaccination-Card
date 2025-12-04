@@ -9,6 +9,7 @@ builder.ConfigureLogs();
 
 builder.Services
     .AddInfrastructure(builder.Configuration)
+    .AddApplication()
     .AddPresentation();
 
 
