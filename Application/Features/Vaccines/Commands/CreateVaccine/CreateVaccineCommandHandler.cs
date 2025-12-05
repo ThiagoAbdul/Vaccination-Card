@@ -1,9 +1,9 @@
 ﻿using Application.Common.Models;
-using Application.Vaccines.Responses;
+using Application.Features.Vaccines.Responses;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Vaccines.Commands.CreateVaccine;
+namespace Application.Features.Vaccines.Commands.CreateVaccine;
 
 public class CreateVaccineCommandHandler : IRequestHandler<CreateVaccineCommand, Result<CreateVaccineResponse>>
 {

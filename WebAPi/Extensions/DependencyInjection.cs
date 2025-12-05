@@ -1,10 +1,8 @@
 ﻿using Application;
-using Application.Common.Models;
+using Application.Repositories;
 using FluentValidation;
 using Infrastructure.Context;
-using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 namespace WebAPi.Extensions;
 
@@ -18,6 +16,10 @@ public static class DependencyInjection
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             options.UseNpgsql(connectionString);
         });
+
+        services.AddScoped<IPersonRepository, PersonRepository>();
+        services.AddScoped<IVaccineRepository, VaccineRepository>();
+        services.AddScoped<IVaccinationRepository, VaccinationRepository>();
 
         return services;
     }

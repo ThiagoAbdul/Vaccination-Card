@@ -1,7 +1,7 @@
 ﻿using Common.Resources;
 using FluentValidation;
 
-namespace Application.Vaccines.Commands.CreateVaccine;
+namespace Application.Features.Vaccines.Commands.CreateVaccine;
 
 public class CreateVaccineCommandValidator : AbstractValidator<CreateVaccineCommand>
 {

@@ -1,4 +1,4 @@
-﻿using Application.Vaccines.Commands.CreateVaccine;
+﻿using Application.Features.Vaccines.Commands.CreateVaccine;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebAPi.Extensions;
