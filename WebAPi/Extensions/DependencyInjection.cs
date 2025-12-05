@@ -1,8 +1,11 @@
 ﻿using Application;
+using Application.Common.Models;
+using FluentValidation;
 using Infrastructure.Context;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
 namespace WebAPi.Extensions;
 
 public static class DependencyInjection
@@ -27,6 +30,7 @@ public static class DependencyInjection
             cfg.RegisterServicesFromAssembly(typeof(ApplicationAssemblyReference).Assembly); // Não ter que registrar os Hanlders no container de DI
         });
 
+        services.AddValidatorsFromAssembly(typeof(ApplicationAssemblyReference).Assembly);
 
         return services;
     }

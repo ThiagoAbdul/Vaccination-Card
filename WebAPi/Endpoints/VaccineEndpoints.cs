@@ -1,5 +1,4 @@
 ﻿using Application.Vaccines.Commands.CreateVaccine;
-using Application.Vaccines.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebAPi.Extensions;
@@ -24,6 +23,9 @@ public static class VaccineEndpoints
             if(result.IsSuccess) return Results.Created($"/api/vaccines/{result.Value!.Id}", result.Value);
             return result.ToHttpResult();
         })
+        .AddValidation<CreateVaccineCommand>() // No .NET 10 as data Annotations funcionam bem com minimal APIs
+                                                   // mas ainda não dá MUITO controle,
+                                                   // Então mantive Fluent Validation com um filtro personalizado
         .WithName("GetVaccines");
 
 
