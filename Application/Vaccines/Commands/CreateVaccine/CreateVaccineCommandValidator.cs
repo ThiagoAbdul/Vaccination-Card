@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Common.Resources;
+using FluentValidation;
 
 namespace Application.Vaccines.Commands.CreateVaccine;
 
@@ -8,7 +9,7 @@ public class CreateVaccineCommandValidator : AbstractValidator<CreateVaccineComm
     public CreateVaccineCommandValidator()
     {
         RuleFor(x => x.Name)
-            .NotEmpty().WithMessage("Vaccine name is required.")
-            .MaximumLength(100).WithMessage("Vaccine name must not exceed 100 characters.");
+            .NotEmpty().WithMessage(Messages.VaccineNameIsRequired)
+            .MaximumLength(100).WithMessage(Messages.VaccineNameIsTooLong);
     }
 }

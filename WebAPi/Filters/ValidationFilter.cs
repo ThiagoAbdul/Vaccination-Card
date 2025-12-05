@@ -1,4 +1,5 @@
 ﻿using Application.Common.Models;
+using Common.Resources;
 using FluentValidation;
 
 namespace WebAPi.Filters;
@@ -29,7 +30,7 @@ public class ValidationFilter<T>(IValidator<T> validator) : IEndpointFilter
             );
         var errors = validationResult.Errors.Select(e => e.ErrorMessage);
 
-        var response = new ResponseError("Solicitação inválida") // Carteirinha vai ser em pt
+        var response = new ResponseError(Messages.InvalidRequest) // Carteirinha vai ser em pt
         {
             Details = details,
             Errors = errors
