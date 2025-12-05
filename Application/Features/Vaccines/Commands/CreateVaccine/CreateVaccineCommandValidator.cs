@@ -11,5 +11,7 @@ public class CreateVaccineCommandValidator : AbstractValidator<CreateVaccineComm
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage(Messages.VaccineNameIsRequired)
             .MaximumLength(100).WithMessage(Messages.VaccineNameIsTooLong);
+        RuleFor(x => x.Doses)
+            .GreaterThan(0).WithMessage(Messages.VaccineDosesCannotBeZero);
     }
 }

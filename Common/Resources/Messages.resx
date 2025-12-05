@@ -120,6 +120,9 @@
   <data name="InvalidRequest" xml:space="preserve">
     <value>Requisição inválida</value>
   </data>
+  <data name="VaccineDosesCannotBeZero" xml:space="preserve">
+    <value>A vacina precisa ter no mínimo uma dose</value>
+  </data>
   <data name="VaccineNameIsRequired" xml:space="preserve">
     <value>Nome da vacina é obrigatório</value>
   </data>

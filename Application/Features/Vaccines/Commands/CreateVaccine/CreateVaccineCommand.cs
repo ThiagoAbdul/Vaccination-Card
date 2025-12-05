@@ -11,5 +11,13 @@ public class CreateVaccineCommand : IRequest<Result<CreateVaccineResponse>>
     public int Doses { get; set; }
     public int BoosterDoses { get; set; }
 
+    public Vaccine ToEntity() => new()
+    {
+        Id = Guid.NewGuid(),
+        Name = Name,
+        Doses = Doses,
+        BoosterDoses = BoosterDoses,
+    };
+
 
 }

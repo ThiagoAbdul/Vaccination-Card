@@ -70,6 +70,15 @@ namespace Common.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A vacina precisa ter no mínimo uma dose.
+        /// </summary>
+        public static string VaccineDosesCannotBeZero {
+            get {
+                return ResourceManager.GetString("VaccineDosesCannotBeZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Nome da vacina é obrigatório.
         /// </summary>
         public static string VaccineNameIsRequired {
