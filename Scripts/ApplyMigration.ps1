@@ -1,1 +1,1 @@
-dotnet ef database update -s WebAPi -p Infrastructure
+dotnet ef database update -s src/WebAPi -p src/Infrastructure
