@@ -3,6 +3,7 @@ using Application.Common.Models;
 using Application.Repositories;
 using Application.Security;
 using Common.Resources;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.People.Commands.CreatePerson;
@@ -16,6 +17,7 @@ public class CreatePersonCommandHandler(IPersonRepository personRepository, IHas
         person.CPF = hashService.GenerateDeterministicHash(person.CPF); // Determinístico para busca
         if(person.RG is not null) 
             person.RG = hashService.GenerateDeterministicHash(person.RG);
+            
 
         var cpfExists = await personRepository.ExistsByCPFAsync(person.CPF);
 
@@ -29,4 +31,5 @@ public class CreatePersonCommandHandler(IPersonRepository personRepository, IHas
 
         return new CreatePersonResponse(person);
     }
+
 }

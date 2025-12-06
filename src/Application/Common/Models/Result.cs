@@ -49,7 +49,9 @@ public sealed record Result<T>
     public bool IsFailure => !IsSuccess;
     public ResultStatus Status { get; init; }
     public ResponseError? Error { get; init; }
-    public T? Value { get; }
+    public T? Value { get; init;  }
+
+    private Result(){}
 
 
     private Result(bool isSuccess, ResultStatus status, T? value, ResponseError? error)
@@ -58,6 +60,17 @@ public sealed record Result<T>
         Status = status;
         Value = value;
         Error = error;
+    }
+
+    public Result<R> Map<R>(Func<T, R> map)
+    {
+        return new Result<R>()
+        {
+            IsSuccess = true,
+            Error = Error,
+            Status = Status,
+            Value = Value is null? default : map(Value)
+        };
     }
 
     public static Result<T> Success(T value, ResultStatus code = ResultStatus.Ok) =>

@@ -13,8 +13,10 @@ public class CreatePersonCommandValidator : AbstractValidator<CreatePersonComman
     {
         RuleFor(x => x.Name)
             .NotEmpty().WithMessage(Messages.PersonNameIsRequired)
-            .Must(x => x.IsValid()).WithMessage(Messages.InvalidPersonName);
+            .Must(x => x is null? true : x.IsValid()).WithMessage(Messages.InvalidPersonName); // Nos testes percebi
+                                                                                               // que daria erro se não validasse o null
         RuleFor(x => x.BirthDate)
+            .NotEmpty()
             .LessThan(DateOnly.FromDateTime(DateTime.Now)).WithMessage(Messages.InvalidBirthdate)
             .Must(AgeHelper.IsValidAge).WithMessage(Messages.InvalidBirthdate);
 
@@ -22,6 +24,7 @@ public class CreatePersonCommandValidator : AbstractValidator<CreatePersonComman
             .IsInEnum().WithMessage(Messages.PersonGenderIsInvalid);
 
         RuleFor(x => x.CPF)
+            .NotEmpty()
             .Must(CPFHelper.IsCPFValid).WithMessage(string.Format(Messages.InvalidField, "CPF"));
 
         // RuleFor() ... outros campos
