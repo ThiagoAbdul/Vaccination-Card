@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -47,6 +48,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
              .WithMany()
              .HasForeignKey(v => v.VaccineId);
 
+            e.OwnsOne(v => v.Dose, vd =>
+            {
+                vd.Property(x => x.Type).HasColumnName("DoseType");
+                vd.Property(x => x.DoseNumber).HasColumnName("DoseNumber");
+            });
+
             e.HasOne(v => v.Person)
              .WithMany(p => p.Vaccinations)
              .HasForeignKey(v => v.PersonId);
@@ -58,7 +65,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
 internal static class EntityExtensions
 {
-    public static void AddSoftDelete<T>(this EntityTypeBuilder<T> builder) where T : AuditableEntity
+    public static void AddSoftDelete<T>(this EntityTypeBuilder<T> builder) where T : class, ISoftDeletable
     {
         builder.HasQueryFilter(e => !e.IsDeleted);
     }

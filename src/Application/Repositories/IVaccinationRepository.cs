@@ -2,7 +2,7 @@ using Domain.Entities;
 
 namespace Application.Repositories;
 
-public interface IVaccinationRepository : IRepositoryBase<Vaccination>
+public interface IVaccinationRepository : IRepositoryBase<Vaccination, Guid>
 {
-    // repository methods can be added here
+    Task<Vaccination?> GetLastVaccinationByPersonAndVaccine(Guid personId, Guid vaccineId);
 }

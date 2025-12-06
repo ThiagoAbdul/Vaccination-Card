@@ -4,11 +4,12 @@
     <Project Path="src/Common/Common.csproj" Id="25dd11c4-eb1e-4b81-8acb-1b76e12691e7" />
     <Project Path="src/Domain/Domain.csproj" />
     <Project Path="src/Infrastructure/Infrastructure.csproj" />
-    <Project Path="src/WebAPi/WebAPi.csproj" DisplayName="WebAPI" />
+    <Project Path="src/WebAPi/WebAPi.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="Infrastructure.UnitTests/Infrastructure.UnitTests.csproj" Id="20b57835-d7fb-4935-8a1b-83aceb8e23c5" />
+    <Project Path="Domain.UnitTests/Domain.UnitTests.csproj" Id="8c008ede-e844-4eca-a822-4e62e172ef58" />
     <Project Path="tests/Application.UnitTests/Application.UnitTests.csproj" Id="c6aa31f5-4064-4ae9-9f04-e4a2e1ecf8cc" />
+    <Project Path="tests/Infrastructure.UnitTests/Infrastructure.UnitTests.csproj" Id="20b57835-d7fb-4935-8a1b-83aceb8e23c5" />
   </Folder>
 
 </Solution>

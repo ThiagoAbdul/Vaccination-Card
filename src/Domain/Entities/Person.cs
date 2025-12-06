@@ -4,9 +4,8 @@ using System.Collections.ObjectModel;
 
 namespace Domain.Entities;
 
-public class Person : AuditableEntity
+public class Person : AuditableEntity<Guid>
 {
-    public Guid Id { get; set; } // Ainda não pretendo utilizar EntityBase com Guid, já me arrependi em uma situação específica.
     public Name Name { get; set; }
     public string CPF { get; set; } // Não pode ser ID, LGPD; a pessoa pode ter informado errado; eu posso deletar (soft delete) e recriar a pessoa.
     public string? RG { get; set; } // Só é único por estado e eu mesmo só fui tirar o meu com 13 anos

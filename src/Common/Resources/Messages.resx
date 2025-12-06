@@ -120,6 +120,9 @@
   <data name="CPFAlreadyRegistered" xml:space="preserve">
     <value>Há um cadastro ativo com este CPF</value>
   </data>
+  <data name="FieldIsMandary" xml:space="preserve">
+    <value>O campo {0} é obrigatório</value>
+  </data>
   <data name="InvalidBirthdate" xml:space="preserve">
     <value>Data de nascimento inválida</value>
   </data>
@@ -139,6 +142,24 @@
   <data name="PersonNameIsRequired" xml:space="preserve">
     <value>Nome da pessoa é obrigatório</value>
   </data>
+  <data name="PersonNotFound" xml:space="preserve">
+    <value>Pessoa não encontrada</value>
+  </data>
+  <data name="VaccinationCannotBeInFuture" xml:space="preserve">
+    <value>data de vacinação não pode ser maior que a data atual</value>
+  </data>
+  <data name="VaccinationDoseIsWrong" xml:space="preserve">
+    <value>Dose da vacinação incorreta. Consulte a carteirinha de vacinação</value>
+  </data>
+  <data name="VaccinationDoseMustBeFirst" xml:space="preserve">
+    <value>Pessoa ainda não tem vacinação cadastrada para essa vacina. Deve tomar a primeira dose</value>
+  </data>
+  <data name="VaccinationDoseMustBeGreatherThanZero" xml:space="preserve">
+    <value>Dose de vacinação tem que ser maior que zero</value>
+  </data>
+  <data name="VaccinationDoseNotAllowedForVaccine" xml:space="preserve">
+    <value>A vacina não possui a dose indicada</value>
+  </data>
   <data name="VaccineDosesCannotBeZero" xml:space="preserve">
     <value>A vacina precisa ter no mínimo uma dose</value>
   </data>
@@ -147,5 +168,8 @@
   </data>
   <data name="VaccineNameIsTooLong" xml:space="preserve">
     <value>Nome da vacina não pode exceder 100 caracteres</value>
+  </data>
+  <data name="VaccineNotFound" xml:space="preserve">
+    <value>Vacina não encontrada</value>
   </data>
 </root>

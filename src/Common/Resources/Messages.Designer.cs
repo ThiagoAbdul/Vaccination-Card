@@ -19,7 +19,7 @@ namespace Common.Resources {
     // através de uma ferramenta como ResGen ou Visual Studio.
     // Para adicionar ou remover um associado, edite o arquivo .ResX e execute ResGen novamente
     // com a opção /str, ou recrie o projeto do VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -66,6 +66,15 @@ namespace Common.Resources {
         public static string CPFAlreadyRegistered {
             get {
                 return ResourceManager.GetString("CPFAlreadyRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo {0} é obrigatório.
+        /// </summary>
+        public static string FieldIsMandary {
+            get {
+                return ResourceManager.GetString("FieldIsMandary", resourceCulture);
             }
         }
         
@@ -124,6 +133,60 @@ namespace Common.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pessoa não encontrada.
+        /// </summary>
+        public static string PersonNotFound {
+            get {
+                return ResourceManager.GetString("PersonNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a data de vacinação não pode ser maior que a data atual.
+        /// </summary>
+        public static string VaccinationCannotBeInFuture {
+            get {
+                return ResourceManager.GetString("VaccinationCannotBeInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Dose da vacinação incorreta. Consulte a carteirinha de vacinação.
+        /// </summary>
+        public static string VaccinationDoseIsWrong {
+            get {
+                return ResourceManager.GetString("VaccinationDoseIsWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Pessoa ainda não tem vacinação cadastrada para essa vacina. Deve tomar a primeira dose.
+        /// </summary>
+        public static string VaccinationDoseMustBeFirst {
+            get {
+                return ResourceManager.GetString("VaccinationDoseMustBeFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Dose de vacinação tem que ser maior que zero.
+        /// </summary>
+        public static string VaccinationDoseMustBeGreatherThanZero {
+            get {
+                return ResourceManager.GetString("VaccinationDoseMustBeGreatherThanZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A vacina não possui a dose indicada.
+        /// </summary>
+        public static string VaccinationDoseNotAllowedForVaccine {
+            get {
+                return ResourceManager.GetString("VaccinationDoseNotAllowedForVaccine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a A vacina precisa ter no mínimo uma dose.
         /// </summary>
         public static string VaccineDosesCannotBeZero {
@@ -147,6 +210,15 @@ namespace Common.Resources {
         public static string VaccineNameIsTooLong {
             get {
                 return ResourceManager.GetString("VaccineNameIsTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Vacina não encontrada.
+        /// </summary>
+        public static string VaccineNotFound {
+            get {
+                return ResourceManager.GetString("VaccineNotFound", resourceCulture);
             }
         }
     }

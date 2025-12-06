@@ -4,6 +4,7 @@ using Infrastructure.Context;
 
 namespace Infrastructure.Repositories;
 
-public class VaccineRepository(AppDbContext db) : RepositoryBase<Vaccine>(db), IVaccineRepository
+public class VaccineRepository(AppDbContext db) : RepositoryBase<Vaccine, Guid>(db), IVaccineRepository
 {
+
 }

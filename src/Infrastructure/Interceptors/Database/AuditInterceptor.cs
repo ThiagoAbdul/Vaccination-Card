@@ -3,6 +3,7 @@ using Application.Common.Interfaces;
 using Application.Common.Models;
 
 using Domain.Entities;
+using Domain.Interfaces;
 using Infrastructure.Settings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -43,7 +44,7 @@ public class AuditInterceptor(IHttpContextAccessor httpContextAccessor, IMessage
     {
         if (context is null) return;
 
-        var entries = context.ChangeTracker.Entries<AuditableEntity>()
+        var entries = context.ChangeTracker.Entries<IAuditable>()
             .Where(e => e.State is EntityState.Added or EntityState.Modified or EntityState.Deleted);
 
         List<AuditLog> logs = new (entries.Count());

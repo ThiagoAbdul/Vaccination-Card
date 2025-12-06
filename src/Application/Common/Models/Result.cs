@@ -41,6 +41,8 @@ public sealed record Result
 
     public static Result<T> Failure<T>(string errorMessage, ResultStatus status = ResultStatus.BadRequest) => Result<T>.Failure(status, new ResponseError(errorMessage));
 
+    public Result<T> FailureAs<T>() => Failure<T>(Error!.Message, Status);
+
 }
 
 public sealed record Result<T>

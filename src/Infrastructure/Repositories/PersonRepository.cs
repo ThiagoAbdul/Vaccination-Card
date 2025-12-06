@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class PersonRepository(AppDbContext db) : RepositoryBase<Person>(db), IPersonRepository
+public class PersonRepository(AppDbContext db) : RepositoryBase<Person, Guid>(db), IPersonRepository
 {
 
     public Task<bool> ExistsByCPFAsync(string cpf)
