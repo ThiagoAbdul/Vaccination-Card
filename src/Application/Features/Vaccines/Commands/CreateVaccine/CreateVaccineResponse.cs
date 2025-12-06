@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 
-namespace Application.Features.Vaccines.Responses;
+namespace Application.Features.Vaccines.Commands.CreateVaccine;
 
 public class CreateVaccineResponse(Vaccine vaccine)
 {

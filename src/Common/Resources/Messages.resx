@@ -117,8 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CPFAlreadyRegistered" xml:space="preserve">
+    <value>Há um cadastro ativo com este CPF</value>
+  </data>
+  <data name="InvalidBirthdate" xml:space="preserve">
+    <value>Data de nascimento inválida</value>
+  </data>
+  <data name="InvalidField" xml:space="preserve">
+    <value>Campo inválido {0}.</value>
+    <comment>Pra escalar</comment>
+  </data>
+  <data name="InvalidPersonName" xml:space="preserve">
+    <value>Nome inválido</value>
+  </data>
   <data name="InvalidRequest" xml:space="preserve">
     <value>Requisição inválida</value>
+  </data>
+  <data name="PersonGenderIsInvalid" xml:space="preserve">
+    <value>Código de sexo inválido, consulte a equipe técnica</value>
+  </data>
+  <data name="PersonNameIsRequired" xml:space="preserve">
+    <value>Nome da pessoa é obrigatório</value>
   </data>
   <data name="VaccineDosesCannotBeZero" xml:space="preserve">
     <value>A vacina precisa ter no mínimo uma dose</value>

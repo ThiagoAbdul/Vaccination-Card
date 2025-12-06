@@ -19,7 +19,7 @@ namespace Common.Resources {
     // através de uma ferramenta como ResGen ou Visual Studio.
     // Para adicionar ou remover um associado, edite o arquivo .ResX e execute ResGen novamente
     // com a opção /str, ou recrie o projeto do VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -61,11 +61,65 @@ namespace Common.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Há um cadastro ativo com este CPF.
+        /// </summary>
+        public static string CPFAlreadyRegistered {
+            get {
+                return ResourceManager.GetString("CPFAlreadyRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Data de nascimento inválida.
+        /// </summary>
+        public static string InvalidBirthdate {
+            get {
+                return ResourceManager.GetString("InvalidBirthdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Campo inválido {0}..
+        /// </summary>
+        public static string InvalidField {
+            get {
+                return ResourceManager.GetString("InvalidField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nome inválido.
+        /// </summary>
+        public static string InvalidPersonName {
+            get {
+                return ResourceManager.GetString("InvalidPersonName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Requisição inválida.
         /// </summary>
         public static string InvalidRequest {
             get {
                 return ResourceManager.GetString("InvalidRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Código de sexo inválido, consulte a equipe técnica.
+        /// </summary>
+        public static string PersonGenderIsInvalid {
+            get {
+                return ResourceManager.GetString("PersonGenderIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Nome da pessoa é obrigatório.
+        /// </summary>
+        public static string PersonNameIsRequired {
+            get {
+                return ResourceManager.GetString("PersonNameIsRequired", resourceCulture);
             }
         }
         

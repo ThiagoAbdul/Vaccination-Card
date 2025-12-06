@@ -19,14 +19,14 @@ public sealed record Result
         Status = status,
     };
 
-    public static Result Failure(ResponseError error, ResultStatus status = ResultStatus.Accpeted) => new()
+    public static Result Failure(ResponseError error, ResultStatus status = ResultStatus.Accepted) => new()
     {
         IsSuccess = false,
         Status = status,
         Error = error
     };
 
-    public static Result Failure(string errorMessage, ResultStatus status = ResultStatus.Accpeted) => new()
+    public static Result Failure(string errorMessage, ResultStatus status = ResultStatus.BadRequest) => new()
     {
         IsSuccess = false,
         Status = status,
@@ -36,17 +36,21 @@ public sealed record Result
     public static implicit operator Result(ResponseError error) => Failure(error);
 
     public static implicit operator Result(string error) => Failure(new ResponseError(error)); // Primeira vez que uso o Result Pattern com implicit,
-                                                                            // achei BEM MAIS limpo
-                                                                            // Mas fica sempre com o Status Code default
+                                                                                               // achei BEM MAIS limpo
+                                                                                               // Mas fica sempre com o Status Code default
+
+    public static Result<T> Failure<T>(string errorMessage, ResultStatus status = ResultStatus.BadRequest) => Result<T>.Failure(status, new ResponseError(errorMessage));
+
 }
 
 public sealed record Result<T>
 {
-    public bool IsSuccess { get; }
+    public bool IsSuccess { get; init; }
     public bool IsFailure => !IsSuccess;
-    public ResultStatus Status { get; }
-    public ResponseError? Error { get; }
+    public ResultStatus Status { get; init; }
+    public ResponseError? Error { get; init; }
     public T? Value { get; }
+
 
     private Result(bool isSuccess, ResultStatus status, T? value, ResponseError? error)
     {
@@ -61,6 +65,7 @@ public sealed record Result<T>
 
     public static Result<T> Failure(ResultStatus status, ResponseError error) =>
         new(false, status, default, error);
+
 
     public static implicit operator Result<T>(T value) =>
         Success(value, ResultStatus.Ok);

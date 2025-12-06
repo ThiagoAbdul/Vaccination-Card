@@ -1,12 +1,14 @@
 ﻿using Application;
 using Application.Common.Interfaces;
 using Application.Repositories;
+using Application.Security;
 using FluentValidation;
 using Infrastructure.Context;
 using Infrastructure.Interceptors;
 using Infrastructure.Interceptors.Database;
 using Infrastructure.Message;
 using Infrastructure.Repositories;
+using Infrastructure.Security;
 using Infrastructure.Settings;
 using Microsoft.EntityFrameworkCore;
 namespace WebAPi.Extensions;
@@ -32,6 +34,9 @@ public static class DependencyInjection
             .UseNpgsql(connectionString)
             .AddInterceptors(logger, audit);
         });
+
+        services.AddSingleton<IVaultClient, MockVaultClient>();
+        services.AddSingleton<IHashService, HashService>();
 
         services.AddScoped<IPersonRepository, PersonRepository>();
         services.AddScoped<IVaccineRepository, VaccineRepository>();

@@ -1,5 +1,4 @@
 ﻿using Application.Common.Models;
-using Application.Features.Vaccines.Responses;
 using Domain.Entities;
 using MediatR;
 

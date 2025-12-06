@@ -26,9 +26,9 @@ public class ValidationFilter<T>(IValidator<T> validator) : IEndpointFilter
             .GroupBy(e => e.PropertyName)
             .ToDictionary(
                 g => g.Key,
-                g => g.Select(e => e.ErrorMessage) as object
+                g => g.Select(e => e.ErrorMessage).Distinct() as object
             );
-        var errors = validationResult.Errors.Select(e => e.ErrorMessage);
+        var errors = validationResult.Errors.Select(e => e.ErrorMessage).Distinct();
 
         var response = new ResponseError(Messages.InvalidRequest) // Carteirinha vai ser em pt
         {

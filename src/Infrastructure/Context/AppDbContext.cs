@@ -6,10 +6,15 @@ namespace Infrastructure.Context;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
+    public DbSet<Person> Persons { get; set; }
+    public DbSet<Vaccine> Vaccines { get; set; }
+    public DbSet<Vaccination> Vaccinations { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Person>(e =>
         {
+            e.ToTable("Person");
+
             e.HasKey(p => p.Id);
             e.OwnsOne(p => p.Name, n =>
             {
@@ -28,12 +33,15 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
 
         modelBuilder.Entity<Vaccine>(e =>
         {
+            e.ToTable("Vaccine");
+
             e.HasKey(v => v.Id);
             e.AddSoftDelete();
         });
 
         modelBuilder.Entity<Vaccination>(e =>
         {
+            e.ToTable("Vaccination");
             e.HasKey(v => v.Id);
             e.HasOne(v => v.Vaccine)
              .WithMany()

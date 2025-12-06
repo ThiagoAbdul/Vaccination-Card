@@ -4,7 +4,7 @@ public enum ResultStatus
 {
     Ok,
     Created,
-    Accpeted,
+    Accepted,
     NoContent,
 
     BadRequest,

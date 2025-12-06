@@ -4,5 +4,5 @@ namespace Application.Repositories;
 
 public interface IPersonRepository : IRepositoryBase<Person>
 {
-    // repository methods can be added here
+    Task<bool> ExistsByCPFAsync(string cpf);
 }

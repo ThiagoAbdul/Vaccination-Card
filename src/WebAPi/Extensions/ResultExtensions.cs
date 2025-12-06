@@ -13,7 +13,7 @@ public static class ResultExtensions // Aqui é mais um ponto legal do Result Pa
         {
             ResultStatus.Ok => Results.Ok(),
             ResultStatus.Created => Results.StatusCode(StatusCodes.Status201Created),
-            ResultStatus.Accpeted => Results.StatusCode(StatusCodes.Status202Accepted),
+            ResultStatus.Accepted => Results.StatusCode(StatusCodes.Status202Accepted),
             ResultStatus.NoContent => Results.NoContent(),
 
             ResultStatus.BadRequest => Results.BadRequest(result.Error),
@@ -35,7 +35,7 @@ public static class ResultExtensions // Aqui é mais um ponto legal do Result Pa
         {
             ResultStatus.Ok => Results.Ok(result.Value),
             ResultStatus.Created => Results.Created(string.Empty, result.Value),
-            ResultStatus.Accpeted => Results.Accepted(string.Empty, result.Value),
+            ResultStatus.Accepted => Results.Accepted(string.Empty, result.Value),
             ResultStatus.NoContent => Results.NoContent(),
 
             ResultStatus.BadRequest => Results.BadRequest(result.Error),
