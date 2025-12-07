@@ -1,0 +1,22 @@
+<h1>Pessoas</h1>
+
+<div class="tools">
+  <app-button text="Cadatrar pessoa" width="fit-content" (click)="showCreatePersonModal = true"/>
+</div>
+
+<table>
+  <thead>
+    <th>Nome</th>
+    <th>Doses primárias</th>
+    <th>Doses reforço</th>
+  </thead>
+  <tbody>
+    @for (person of (page$ | async)?.items ?? []; track person.id) {
+      <tr>
+        <td>{{ person.firstName }} {{ person.lastName }}</td>
+        <td>{{ person.gender | gender }}</td>
+        <td>{{ person.birthDate | brDate }}</td>
+      </tr>
+    }
+  </tbody>
+</table>

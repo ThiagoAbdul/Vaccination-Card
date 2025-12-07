@@ -6,6 +6,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { homeRoutes } from './features/home/home.routes';
 import { vaccineRoutes } from './features/vaccines/vaccine.routes';
 import { authGuard } from './auth/guards/auth.guard';
+import { personRoutes } from './features/people/person.routes';
 
 export const routes: Routes = [
   {
@@ -19,7 +20,8 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: "home", children: homeRoutes },
-      { path: "vacinas", children: vaccineRoutes }
+      { path: "vacinas", children: vaccineRoutes },
+      { path: "pessoas", children: personRoutes },
     ],
     canActivate: [ authGuard ]
   },

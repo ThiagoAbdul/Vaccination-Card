@@ -1,0 +1,17 @@
+table{
+  border-collapse: collapse;
+  th{
+    background-color: gray;
+  }
+}
+
+table, th, td {
+  border: 1px solid #ccc;
+}
+
+.tools{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
