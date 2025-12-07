@@ -19,7 +19,7 @@ namespace Common.Resources {
     // através de uma ferramenta como ResGen ou Visual Studio.
     // Para adicionar ou remover um associado, edite o arquivo .ResX e execute ResGen novamente
     // com a opção /str, ou recrie o projeto do VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Messages {
@@ -111,6 +111,24 @@ namespace Common.Resources {
         public static string InvalidRequest {
             get {
                 return ResourceManager.GetString("InvalidRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tamanho da página não pode ser negativo.
+        /// </summary>
+        public static string PageSizeCannotBeNegative {
+            get {
+                return ResourceManager.GetString("PageSizeCannotBeNegative", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Tamanho da página deve ser menor que {0}.
+        /// </summary>
+        public static string PageSizeMustBeLowerThan {
+            get {
+                return ResourceManager.GetString("PageSizeMustBeLowerThan", resourceCulture);
             }
         }
         

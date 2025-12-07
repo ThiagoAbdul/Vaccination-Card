@@ -29,6 +29,10 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
              .WithOne(v => v.Person)
              .HasForeignKey(v => v.PersonId);
 
+            e.HasIndex(p => p.NameSearchableColumn); // Sim, por mais que eu vou fazer buscas LIKE, o índice padrão B-TREE funciona
+                                                 // Ele só não funcionaria se a busca fosse '%termo%',
+                                                 // mas como vou usar 'termo%' ele funciona bem.
+
             e.AddSoftDelete();
         });
 

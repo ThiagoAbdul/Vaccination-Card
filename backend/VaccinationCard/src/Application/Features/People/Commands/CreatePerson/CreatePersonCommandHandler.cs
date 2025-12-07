@@ -26,6 +26,8 @@ public class CreatePersonCommandHandler(IPersonRepository personRepository, IHas
             return Result.Failure<CreatePersonResponse>(Messages.CPFAlreadyRegistered, ResultStatus.Conflict);
         }
 
+        person.NameSearchableColumn = $"{person.Name.FullName.ToLower()}"; // para evitar buscas like
+
         await personRepository.AddAsync(person);
         await personRepository.SaveChangesAsync();
 

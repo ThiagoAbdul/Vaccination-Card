@@ -1,3 +1,4 @@
+using Application.Common.Models;
 using Application.Repositories;
 using Domain.Entities;
 using Infrastructure.Context;
@@ -45,4 +46,50 @@ public class PersonRepository(AppDbContext db) : RepositoryBase<Person, Guid>(db
             throw;
         }
     }
+
+    public async Task<PageModel<Person>> GetPaginatedAsync(int page, int pageSize, string searchTerm)
+    {
+
+        page = Math.Max(1, page);
+        pageSize = Math.Max(1, pageSize);
+
+        searchTerm = $"{searchTerm.Trim().ToLower()}%"; // Salvo lower e busco lower, pra não usar ILIKE que é masi caro
+                                                        // e nem todos SGBDs suportam 
+
+
+        var query = _db.Persons.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(searchTerm))
+        {
+
+            // Buscar na coluna pesquisável pra não fazer OR com LIKE
+            query = query.Where(p => EF.Functions.Like(p.NameSearchableColumn, searchTerm)); // Já protege contra SQL Injection
+                                                                                   // Eu fui pesquisar por que fiquei preocupado
+        }
+
+        var totalCount = await query.CountAsync();
+
+        var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
+
+        var skipAmount = (page - 1) * pageSize;
+
+        var persons = await query
+            .OrderBy(p => p.CreatedAt) // Curiosidade, se eu utilizasse o ID que é um GUID
+                                       // O PostgreSQL (ou outro SGBD) iria fazer praticamente uma busca sequencial,
+                                       // Pois UUID não é ordenável, então não se encaixa bem na B* TREE (estrutura de dados mais utilizada para indexar)
+                                       // Existe o UUIDv7 que é ordenável
+            .Skip(skipAmount)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return new PageModel<Person>
+        {
+            Items = persons,
+            CurrentPage = page,
+            PageSize = pageSize,
+            TotalItems = totalCount,
+            TotalPages = totalPages
+        };
+    }
+
 }

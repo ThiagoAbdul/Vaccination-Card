@@ -136,6 +136,12 @@
   <data name="InvalidRequest" xml:space="preserve">
     <value>Requisição inválida</value>
   </data>
+  <data name="PageSizeCannotBeNegative" xml:space="preserve">
+    <value>Tamanho da página não pode ser negativo</value>
+  </data>
+  <data name="PageSizeMustBeLowerThan" xml:space="preserve">
+    <value>Tamanho da página deve ser menor que {0}</value>
+  </data>
   <data name="PersonGenderIsInvalid" xml:space="preserve">
     <value>Código de sexo inválido, consulte a equipe técnica</value>
   </data>

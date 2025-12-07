@@ -14,5 +14,6 @@ public class Person : AuditableEntity<Guid>
     public List<Vaccination> Vaccinations { get; set; } = []; // Não precisa ser "virtual", não vou usar lazy loading, o time do EF desencoraja o uso.
                                                                // Bom que evita N+1 consultas.
                                                                // Já tive problemas com isso no JPA/Hibernate, que usa lazy loadig por default.
+    public string NameSearchableColumn { get; set; }    
 
 }
