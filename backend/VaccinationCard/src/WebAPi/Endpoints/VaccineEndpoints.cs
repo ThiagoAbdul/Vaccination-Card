@@ -1,4 +1,6 @@
 ﻿using Application.Features.Vaccines.Commands.CreateVaccine;
+using Application.Features.Vaccines.GetAllVaccines;
+using Application.Features.Vaccines.GetVaccines;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebAPi.Extensions;
@@ -29,6 +31,14 @@ public static class VaccineEndpoints
                                                    // mas ainda não dá MUITO controle,
                                                    // Então mantive Fluent Validation com um filtro personalizado
         .WithName("GetVaccines");
+
+        group.MapGet("/", async ([FromServices] IMediator mediator) =>
+        {
+            var result = await mediator.Send(new GetAllVaccinesQuery());
+
+            return result.ToHttpResult();
+        })
+        .Produces<IEnumerable<VaccineResponse>>(200);
 
 
         return app;

@@ -15,14 +15,14 @@ public class GetVaccinationCardResponseMapper
                 {
                     var vaccination = vaccine.Vaccinations.FirstOrDefault(vc => vc.Dose == dose);
 
-                    var vaccinationResponse =  new GetVaccinationCardResponse.VaccinationResponse
+                    var vaccinationResponse =  new GetVaccinationCardResponse.VaccinationDetails
                     {
                         Id = vaccination?.Id,
                         Applied = vaccination is not null,
                         VaccinationDate = vaccination?.VaccinationDate
                     };
 
-                    return new GetVaccinationCardResponse.DoseResponse
+                    return new GetVaccinationCardResponse.DoseDetails
                     {
                         Type = dose.Type,
                         DoseNumber = dose.DoseNumber,
@@ -32,7 +32,7 @@ public class GetVaccinationCardResponseMapper
 
                 }).ToList();
 
-                return new GetVaccinationCardResponse.VaccineResponse
+                return new GetVaccinationCardResponse.VaccineDetails
                 {
                     Id = vaccine.Id,
                     Doses = dosesResponses,

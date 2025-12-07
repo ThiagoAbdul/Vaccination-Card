@@ -25,5 +25,10 @@ public abstract class RepositoryBase<T, ID>(AppDbContext db) : IRepositoryBase<T
 
     public Task SaveChangesAsync() => _db.SaveChangesAsync();
 
+    public Task<List<T>> GetAllAsync() // Em raríssimos casos e ainda com filtro de quem está deletado
+    {
+        return _dbSet.ToListAsync();
+    } 
+
 
 }

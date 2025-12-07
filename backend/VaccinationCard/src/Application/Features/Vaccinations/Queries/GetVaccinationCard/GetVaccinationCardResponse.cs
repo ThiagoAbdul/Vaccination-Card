@@ -8,17 +8,17 @@ namespace Application.Features.Vaccinations.Queries.GetVaccinationCardByPersonId
 public class GetVaccinationCardResponse
 {
 
-    public List<VaccineResponse> Vaccines { get; set; }
+    public List<VaccineDetails> Vaccines { get; set; }
 
-    public class VaccineResponse
+    public class VaccineDetails
     {
         public Guid Id { get; init; }
         public string Name { get; init; }
-        public List<DoseResponse> Doses { get; set; }
+        public List<DoseDetails> Doses { get; set; }
 
     }
 
-    public class VaccinationResponse
+    public class VaccinationDetails
     {
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Guid? Id { get; init; }
@@ -28,11 +28,11 @@ public class GetVaccinationCardResponse
         public bool Applied { get; set; }
     }
 
-    public class DoseResponse
+    public class DoseDetails
     {
         public bool Available { get; set; }
         public VaccineDoseType Type { get; set; }
         public int DoseNumber { get; set; }
-        public VaccinationResponse Vaccination { get; set; }
+        public VaccinationDetails Vaccination { get; set; }
     }
 }
