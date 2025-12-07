@@ -7,7 +7,7 @@
     <Project Path="src/WebAPi/WebAPi.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="Domain.UnitTests/Domain.UnitTests.csproj" Id="8c008ede-e844-4eca-a822-4e62e172ef58" />
+    <Project Path="tests/Domain.UnitTests/Domain.UnitTests.csproj" Id="8c008ede-e844-4eca-a822-4e62e172ef58" />
     <Project Path="tests/Application.UnitTests/Application.UnitTests.csproj" Id="c6aa31f5-4064-4ae9-9f04-e4a2e1ecf8cc" />
     <Project Path="tests/Infrastructure.UnitTests/Infrastructure.UnitTests.csproj" Id="20b57835-d7fb-4935-8a1b-83aceb8e23c5" />
   </Folder>
