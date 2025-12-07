@@ -66,6 +66,24 @@ public class Vaccine : AuditableEntity<Guid>
         throw new InvalidVaccinationDoseException();
     }
 
+    public IEnumerable<VaccinationDose> GetDoses()
+    {
+        var doses = new VaccinationDose[Doses + BoosterDoses];
+
+
+        for(int i = 0; i < Doses; i++)
+        {
+            doses[i] = new VaccinationDose(VaccineDoseType.Primary, i + 1);
+        }
+
+        for (int i = 0; i < BoosterDoses; i++)
+        {
+            doses[Doses + i] = new VaccinationDose(VaccineDoseType.Booster, i + 1);
+        }
+
+        return doses;
+
+    }
 
 }
 

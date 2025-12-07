@@ -7,7 +7,7 @@ public class GetVaccinationCardResponseMapper
 {
     public static GetVaccinationCardResponse Map(IEnumerable<Vaccine> vaccines)
     {
-        var doses = vaccines.SelectMany(v => v.Vaccinations).Select(vc => vc.Dose).Distinct().ToList();
+        var doses = vaccines.SelectMany(v => v.GetDoses()).Distinct().ToList();
         var vaccinesResponse = vaccines
             .Select(vaccine =>
             {

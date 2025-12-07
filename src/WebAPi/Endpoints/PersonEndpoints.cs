@@ -1,4 +1,5 @@
 ﻿using Application.Features.People.Commands.CreatePerson;
+using Application.Features.People.Commands.DeletePerson;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebAPi.Extensions;
@@ -23,6 +24,15 @@ public static class PersonEndpoints
         })
         .AddValidation<CreatePersonCommand>()
         .Produces<CreatePersonResponse>(201);
+
+        group.MapDelete("/{personId}", async ([FromRoute] Guid personId, [FromServices] IMediator mediator) =>
+        {
+            var result = await mediator.Send(new DeletePersonCommand(personId));
+
+            return result.ToHttpResult();
+        })
+        .Produces(204)
+        .Produces(404);
 
         return app;
     }
