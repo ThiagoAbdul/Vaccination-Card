@@ -1,0 +1,18 @@
+@if (label()) {
+  <label class="text-notes">{{ label() }}</label>
+}
+<div class="input-container">
+    <input #target [class.readOnly]="isDisabled"
+      [(ngModel)]="value"
+      [placeholder]="placeholder()"
+      [type]="type()"
+      [disabled]="isDisabled"
+      (input)="onValueChange(value)"
+      [readOnly]="readOnly()"
+      (blur)="onBlur()"
+    />
+  </div>
+
+@if((errorMessage() || controlErrorMessage) && hasError && touched){
+  <span class="error-message">{{ errorMessage() ?? controlErrorMessage  }}</span>
+}
