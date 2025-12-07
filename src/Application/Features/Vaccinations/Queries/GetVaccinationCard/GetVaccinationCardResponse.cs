@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Enums;
 using Domain.ValueObjects;
+using System.Text.Json.Serialization;
 
 namespace Application.Features.Vaccinations.Queries.GetVaccinationCardByPersonId;
 
@@ -19,7 +20,10 @@ public class GetVaccinationCardResponse
 
     public class VaccinationResponse
     {
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public Guid? Id { get; init; }
+
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public DateOnly? VaccinationDate { get; set; }
         public bool Applied { get; set; }
     }
