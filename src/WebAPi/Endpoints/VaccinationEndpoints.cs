@@ -1,4 +1,5 @@
 ﻿using Application.Features.Vaccinations.Commands.CreateVaccination;
+using Application.Features.Vaccinations.Queries.GetVaccinationCardByPersonId;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebAPi.Extensions;
@@ -24,6 +25,14 @@ public static class VaccinationEndpoints
         })
         .AddValidation<CreateVaccinationCommand>()
         .Produces<CreateVaccinationResponse>(201);
+
+        group.MapGet("/person/{personId}/vaccination-card", async ([FromRoute] Guid personId, [FromServices] IMediator mediator) =>
+        {
+            var result = await mediator.Send(new GetVaccinationCardQuery(personId));
+
+            return result.ToHttpResult();
+        })
+        .Produces<GetVaccinationCardResponse>(200);
 
         return app;
     }

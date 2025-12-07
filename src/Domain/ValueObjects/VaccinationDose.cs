@@ -6,6 +6,7 @@ namespace Domain.ValueObjects;
 public class VaccinationDose : IComparable<VaccinationDose>
 {
     public VaccineDoseType Type { get; set; }
+
     public int DoseNumber { get; set; }
 
     public bool IsFirstDose()

@@ -9,6 +9,7 @@ public class Vaccine : AuditableEntity<Guid>
     public string Name { get; set; }
     public int Doses { get; set; }
     public int BoosterDoses { get; set; }
+    public List<Vaccination> Vaccinations { get; set; }
 
     public bool AllowsDose(VaccinationDose dose)
     {

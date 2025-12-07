@@ -45,7 +45,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             e.ToTable("Vaccination");
             e.HasKey(v => v.Id);
             e.HasOne(v => v.Vaccine)
-             .WithMany()
+             .WithMany(v => v.Vaccinations)
              .HasForeignKey(v => v.VaccineId);
 
             e.OwnsOne(v => v.Dose, vd =>

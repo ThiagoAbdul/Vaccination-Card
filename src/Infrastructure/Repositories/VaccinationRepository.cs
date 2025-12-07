@@ -18,4 +18,5 @@ public class VaccinationRepository(AppDbContext db) : RepositoryBase<Vaccination
         return vaccinations.OrderByDescending(x => x.Dose)
             .FirstOrDefault(); // Sobrecarga da ordenação, pois Vaccination : IComparable
     }
+
 }

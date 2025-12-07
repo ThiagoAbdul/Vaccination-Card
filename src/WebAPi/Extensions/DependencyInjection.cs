@@ -1,5 +1,6 @@
 ﻿using Application;
 using Application.Common.Interfaces;
+using Application.Features.Vaccinations.Queries.GetVaccinationCard;
 using Application.Repositories;
 using Application.Security;
 using FluentValidation;
