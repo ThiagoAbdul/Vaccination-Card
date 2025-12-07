@@ -13,7 +13,8 @@ public static class VaccineEndpoints
     {
 
         var group = app.MapGroup("api/vaccines")
-           .WithTags("Vaccines");
+           .WithTags("Vaccines")
+           .RequireAuthorization();
 
 
 

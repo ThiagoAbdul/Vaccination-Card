@@ -27,6 +27,9 @@ app.UseHttpsRedirection();
 
 app.UseHealthChecks("/health");
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseSerilogRequestLogging();
 
 app

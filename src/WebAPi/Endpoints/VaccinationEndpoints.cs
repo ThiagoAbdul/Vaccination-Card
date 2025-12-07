@@ -12,7 +12,8 @@ public static class VaccinationEndpoints
     public static IEndpointRouteBuilder MapVaccinationEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("api/vaccinations")
-           .WithTags("Vaccinations");
+           .WithTags("Vaccinations")
+           .RequireAuthorization();
 
         group.MapPost("/", async ([FromBody] CreateVaccinationCommand command, [FromServices] IMediator mediator) =>
         {

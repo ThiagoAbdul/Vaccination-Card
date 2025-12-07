@@ -11,7 +11,8 @@ public static class PersonEndpoints
     public static IEndpointRouteBuilder MapPersonEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("api/persons")
-           .WithTags("Persons");
+           .WithTags("Persons")
+           .RequireAuthorization();
 
         group.MapPost("/", async ([FromBody] CreatePersonCommand command, [FromServices] IMediator mediator) =>
         {
