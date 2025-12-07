@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { LoginResponse } from '../models/login-response';
@@ -40,7 +40,7 @@ export class AuthService {
 
   refreshTokens(rt: string){
     const endpoint = this.authServiceBaseUrl + "/refresh-token"
-
-    return this.http.post<LoginResponse>(endpoint, rt)
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<LoginResponse>(endpoint, JSON.stringify(rt), { headers })
   }
 }

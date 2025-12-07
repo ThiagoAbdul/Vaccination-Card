@@ -12,3 +12,17 @@ html, body {
   margin: 0;
   height: 100%;
 }
+
+table{
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  th{
+    border: 1px solid #ccc;
+    background-color: gray;
+  }
+  td{
+    padding: 1rem;
+    border: 1px solid #ccc;
+  }
+}
+

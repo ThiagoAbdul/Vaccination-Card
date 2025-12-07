@@ -1,7 +1,7 @@
 <h1>Vacinas</h1>
 
 <div class="tools">
-  <app-button text="Cadatrar vacina" width="fit-content" (click)="showCreatevaccineModal = true"/>
+  <app-button text="Cadatrar vacina" width="fit-content" (click)="showCreateVaccineModal = true"/>
 </div>
 
 <table>
@@ -21,7 +21,7 @@
   </tbody>
 </table>
 
-@if (showCreatevaccineModal) {
-  <app-create-vaccine-modal (cancel)="showCreatevaccineModal = false"
+@if (showCreateVaccineModal) {
+  <app-create-vaccine-modal (cancel)="showCreateVaccineModal = false"
   (created)="onCreate($event)" />
 }

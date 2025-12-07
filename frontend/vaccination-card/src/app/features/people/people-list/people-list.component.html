@@ -7,8 +7,9 @@
 <table>
   <thead>
     <th>Nome</th>
-    <th>Doses primárias</th>
-    <th>Doses reforço</th>
+    <th>Sexo</th>
+    <th>Data de nascimento</th>
+    <th colspan="2">Ações</th>
   </thead>
   <tbody>
     @for (person of (page$ | async)?.items ?? []; track person.id) {
@@ -16,7 +17,15 @@
         <td>{{ person.firstName }} {{ person.lastName }}</td>
         <td>{{ person.gender | gender }}</td>
         <td>{{ person.birthDate | brDate }}</td>
+        <td>Ver carteirinha</td>
+        <td>Excluir</td>
       </tr>
     }
   </tbody>
 </table>
+
+@if (showCreatePersonModal) {
+  <app-create-person-modal
+   (cancel)="showCreatePersonModal = false"
+   (created)="onCreate($event)" />
+}

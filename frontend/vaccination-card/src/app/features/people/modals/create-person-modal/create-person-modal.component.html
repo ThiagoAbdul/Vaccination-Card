@@ -1,0 +1,25 @@
+<app-modal title="Cadastrar pessoa"
+  (close)="cancel.emit()"
+  (secondaryAction)="cancel.emit()"
+  (primaryAction)="createPerson()"
+  primaryText="Cadastar"
+  secondaryText="Cancelar" >
+<form [formGroup]="form" (ngSubmit)="createPerson()">
+  <div formGroupName="name">
+    <app-input formControlName="firstName" placeholder="Primeiro nome" />
+    <app-input formControlName="lastName" placeholder="Sobrenome" />
+  </div>
+
+  <app-input formControlName="cpf" placeholder="CPF" />
+  <app-input formControlName="rg" placeholder="RG" />
+  <select formControlName="gender">
+    <option [ngValue]="0">Feminino</option>
+    <option [ngValue]="1">Masculino</option>
+    <option [ngValue]="2">Outro</option>
+  </select>
+
+  <app-input type="date" formControlName="birthDate" label="Data de nascimento" />
+
+</form>
+
+</app-modal>

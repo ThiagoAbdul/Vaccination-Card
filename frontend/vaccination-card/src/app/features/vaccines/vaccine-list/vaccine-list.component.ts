@@ -19,12 +19,12 @@ export class VaccineListComponent {
   private vaccineService = inject(VaccineService)
   protected vaccines$!: Observable<Vaccine[]>
   private loader = inject(LoaderService)
-  protected showCreatevaccineModal = false
+  protected showCreateVaccineModal = false
   constructor(){
-    this.loadvaccines()
+    this.loadVaccines()
   }
 
-  private loadvaccines(){
+  private loadVaccines(){
     this.loader.displayLoading()
     this.vaccines$ = this.vaccineService
     .listVaccines()
@@ -32,8 +32,8 @@ export class VaccineListComponent {
   }
 
   onCreate(vaccine: CreateVaccineResponse){
-    this.showCreatevaccineModal = false;
-    this.loadvaccines()
+    this.showCreateVaccineModal = false;
+    this.loadVaccines()
     alert(`Vacine ${vaccine.name} cadastrada!`)
 
   }
