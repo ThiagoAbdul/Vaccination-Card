@@ -1,0 +1,12 @@
+<app-modal title="Cadastrar vacina"
+  (close)="cancel.emit()"
+  (secondaryAction)="cancel.emit()"
+  (primaryAction)="createVaccine()"
+  primaryText="Cadastar"
+  secondaryText="Cancelar" >
+  <form [formGroup]="form" >
+    <app-input formControlName="name" label="Nome da vacina" />
+    <app-input formControlName="doses" type="number" label="Quantidade de doses primárias" />
+    <app-input formControlName="boosterDoses" type="number" label="Quantidade de doses de reforço" />
+  </form>
+</app-modal>

@@ -1,0 +1,67 @@
+:host {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: var(--blur-background);
+  z-index: 3;
+  display: block;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .modal {
+    background-color: white;
+    // color: var(--contrast);
+    padding: 3.75rem;
+    border-radius: 12px;
+    // color: var(--contrast);
+    max-height: calc(100vh - 2rem);
+    // overflow-y: auto;
+
+    min-height: 20rem;
+    // overflow-y: auto;
+
+    .header{
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      .close{
+        padding-top: .25rem;
+        cursor: pointer;
+      }
+    }
+
+    h2 {
+      margin: 0;
+      padding: 0;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+
+  }
+
+  .title {
+    font-family: Arial;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 130%;
+    letter-spacing: 0;
+  }
+
+
+
+}
+
+
+.buttons{
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

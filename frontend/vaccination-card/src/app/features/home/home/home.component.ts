@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { AuthService } from '../../../auth/services/auth.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,4 +12,10 @@ import { RouterModule } from '@angular/router';
 })
 export class HomeComponent {
 
+
+  private router = inject(Router)
+
+  goTo(module: string){
+    this.router.navigate([module])
+  }
 }

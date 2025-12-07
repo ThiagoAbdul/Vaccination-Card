@@ -1,4 +1,6 @@
-<button [type]="submit()? 'submit' : 'button'"  class="text-bold" [class.disabled]="disabled()" [ngClass]="[type()]" >
+<button [type]="submit()? 'submit' : 'button'"  class="text-bold"
+  [class.disabled]="disabled()" [ngClass]="[type()]"
+  [ngStyle]="{width: width()}" >
   @if (img()) {
     <img [src]="img()" alt="icon" >
   }

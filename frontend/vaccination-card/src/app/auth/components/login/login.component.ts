@@ -30,7 +30,7 @@ export class LoginComponent {
 
   doLogin(){
     if(this.form.invalid){
-
+      this.form.markAllAsTouched()
       return
     }
 

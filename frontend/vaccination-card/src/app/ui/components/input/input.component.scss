@@ -1,7 +1,23 @@
 :host{
   display: block;
-}
+  width: 100%;
+  &.ng-invalid.ng-touched {
+    label{
+      color: var(--negative) !important;
+    }
+    input, .input-container {
+      border-color: var(--negative) !important;
+      color: var(--negative) !important;
 
+      &::placeholder {
+        color: var(--negative) !important;
+
+      }
+
+
+    }
+  }
+}
 input{
   padding: .5rem;
   width: 100%;
