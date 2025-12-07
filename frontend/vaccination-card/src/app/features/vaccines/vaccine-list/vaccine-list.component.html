@@ -1,0 +1,18 @@
+<h1>Vacinas</h1>
+
+<table>
+  <thead>
+    <th>Nome</th>
+    <th>Doses primárias</th>
+    <th>Doses reforço</th>
+  </thead>
+  <tbody>
+    @for (vaccine of vaccines$ | async; track vaccine.id) {
+      <tr>
+        <td>{{ vaccine.name }}</td>
+        <td>{{ vaccine.doses }}</td>
+        <td>{{ vaccine.boosterDoses }}</td>
+      </tr>
+    }
+  </tbody>
+</table>
