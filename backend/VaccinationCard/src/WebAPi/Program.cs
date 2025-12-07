@@ -9,8 +9,8 @@ builder.ConfigureLogs();
 
 builder.Services
     .AddInfrastructure(builder.Configuration)
-    .AddApplication()
-    .AddPresentation();
+    .AddApplication(builder.Configuration)
+    .AddPresentation(builder.Configuration);
 
 
 builder.Services.AddHealthChecks();
@@ -26,6 +26,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseHealthChecks("/health");
+
+app.UseCors("DefaultPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();

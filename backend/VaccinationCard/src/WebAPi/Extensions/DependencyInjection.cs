@@ -81,7 +81,7 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
 
         services.AddMediatR(cfg =>
@@ -94,7 +94,7 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddPresentation(this IServiceCollection services)
+    public static IServiceCollection AddPresentation(this IServiceCollection services, IConfiguration configuration)
     {
 
         services.AddEndpointsApiExplorer();
@@ -116,20 +116,37 @@ public static class DependencyInjection
 
             // Define o Requisito de Segurança (Security Requirement)
             c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference
                 {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[] {}
                 }
-            },
-            new string[] {}
-        }
-    });
+            });
         });
+        
+        var allowedOrigins = configuration
+        .GetSection("Cors:AllowedOrigins")
+        .Get<string[]>() ?? Array.Empty<string>();
+
+        services.AddCors(options =>
+        {
+            options.AddPolicy("DefaultPolicy", policy =>
+            {
+                policy
+                    .WithOrigins(allowedOrigins)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+
+        });
+
 
 
         return services;
