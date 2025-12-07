@@ -15,19 +15,6 @@
 
 - Excluir registro de vacinação: Permite excluir um registro de vacinação específico do cartão de vacinação de uma pessoa.
 
-## Requisitos explícitos
-- CRUD de vacinas
-- CRUD de vacinações
-- CRUD das vacinações
-- Deletar uma pessoa junto a sua carteirinha de vacinação
-- Validar o tipo de vacinação
-
-## Requisitos implícitos
-- Soft delete
-- Consultas paginadas
-- Colunas de auditoria
-
-
 ## Entidades
 - Pessoa
 - Vacinação
@@ -68,9 +55,18 @@
 - todas as tabelas terão tabelas com o mínimo de controle de auditoria, created_by, created_at, last_updated_by, last_updated_at...
 - Coluna para **Soft delete**  em todas as tabelas (is_deleted)
 
+#### Person
+- Representa uma pessoa no sistema(não necessariamente um usuário)
+
+#### Vaccine
+- Cada vacina possui sua própria quantidade de doses e doses de reforço
+
 #### Vaccination
 - A data de input no sistema e a data de aplicação são diferentes, por isso não utilizei a mesma coluna (no caso do sistema ficar offline ou alguma outra ocorrência).
 - o tipo de dose (1ª, 2ª, reforço, etc...) vai ser um enum, para ter um controle de valores sem necessidade integridade refencial com uma nova tabela (a quantidade de tipos de doses não vai crescer muito e se crescer, é só adicionar mais uma entrada no enum).
+
+#### Diagrama
+![ERD](vaccination_card_erd.png)
 
 # Padrões
 
