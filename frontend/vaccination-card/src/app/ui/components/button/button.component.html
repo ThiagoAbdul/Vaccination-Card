@@ -1,0 +1,6 @@
+<button [type]="submit()? 'submit' : 'button'"  class="text-bold" [class.disabled]="disabled()" [ngClass]="[type()]" >
+  @if (img()) {
+    <img [src]="img()" alt="icon" >
+  }
+  {{ text() }}
+</button>

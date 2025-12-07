@@ -1,0 +1,9 @@
+<h1>Login</h1>
+
+<form [formGroup]="form">
+  <app-input formControlName="email" label="Email" place />
+  <app-input formControlName="password" type="password" label="Senha" />
+
+  <app-button text="Login" (click)="doLogin()" />
+
+</form>
