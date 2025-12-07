@@ -160,6 +160,9 @@
   <data name="VaccinationDoseNotAllowedForVaccine" xml:space="preserve">
     <value>A vacina não possui a dose indicada</value>
   </data>
+  <data name="VaccinationNotFound" xml:space="preserve">
+    <value>Registro de vacinação não encontrado</value>
+  </data>
   <data name="VaccineDosesCannotBeZero" xml:space="preserve">
     <value>A vacina precisa ter no mínimo uma dose</value>
   </data>

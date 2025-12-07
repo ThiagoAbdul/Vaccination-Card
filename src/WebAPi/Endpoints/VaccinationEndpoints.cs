@@ -1,4 +1,5 @@
 ﻿using Application.Features.Vaccinations.Commands.CreateVaccination;
+using Application.Features.Vaccinations.Commands.DeleteVaccination;
 using Application.Features.Vaccinations.Queries.GetVaccinationCardByPersonId;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,14 @@ public static class VaccinationEndpoints
         })
         .Produces<GetVaccinationCardResponse>(200);
 
+        group.MapDelete("/{vaccinationId}", async ([FromRoute] Guid vaccinationId, [FromServices] IMediator mediator) =>
+        {
+            var result = await mediator.Send(new DeleteVaccinationCommand(vaccinationId));
+
+            return result.ToHttpResult();
+        })
+        .Produces(204);
+        
         return app;
     }
 

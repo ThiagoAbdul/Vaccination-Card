@@ -19,4 +19,10 @@ public class VaccinationRepository(AppDbContext db) : RepositoryBase<Vaccination
             .FirstOrDefault(); // Sobrecarga da ordenação, pois Vaccination : IComparable
     }
 
+    public async Task DeleteAsync(Guid vaccinationId)
+    {
+        await _dbSet.Where(x => x.Id == (vaccinationId))
+            .ExecuteUpdateAsync(setter => setter.SetProperty(x => x.IsDeleted, true));
+    }
+
 }

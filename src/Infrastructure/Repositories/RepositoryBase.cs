@@ -25,4 +25,5 @@ public abstract class RepositoryBase<T, ID>(AppDbContext db) : IRepositoryBase<T
 
     public Task SaveChangesAsync() => _db.SaveChangesAsync();
 
+
 }

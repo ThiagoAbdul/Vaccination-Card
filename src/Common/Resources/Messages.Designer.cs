@@ -187,6 +187,15 @@ namespace Common.Resources {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a Registro de vacinação não encontrado.
+        /// </summary>
+        public static string VaccinationNotFound {
+            get {
+                return ResourceManager.GetString("VaccinationNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a A vacina precisa ter no mínimo uma dose.
         /// </summary>
         public static string VaccineDosesCannotBeZero {
