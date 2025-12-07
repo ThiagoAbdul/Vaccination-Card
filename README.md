@@ -15,31 +15,6 @@
 
 - Excluir registro de vacinação: Permite excluir um registro de vacinação específico do cartão de vacinação de uma pessoa.
 
-## Entidades
-- Pessoa
-- Vacinação
-- Vacina
-
-#### Pessoa
-- Id
-- CPF
-- RG
-- Nome
-- Idade
-- Sexo
-- Endereço
-
-#### Vacina
-- Nome
-- Doses
-- Quantidade reforço
-
-#### Vacinação
-- Pessoa
-- Vacina
-- Data
-- Tipo  
-
 
 ## Arquitetura
 
@@ -59,7 +34,7 @@
 - Representa uma pessoa no sistema(não necessariamente um usuário)
 
 #### Vaccine
-- Cada vacina possui sua própria quantidade de doses e doses de reforço
+- Cada vacina possui sua própria quantidade de doses e doses de reforço (sem uma tabela extra representando uma dose, preferi fazer o agrupamento pelo código)
 
 #### Vaccination
 - A data de input no sistema e a data de aplicação são diferentes, por isso não utilizei a mesma coluna (no caso do sistema ficar offline ou alguma outra ocorrência).
