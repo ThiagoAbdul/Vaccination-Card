@@ -14,11 +14,11 @@
   <tbody>
     @for (person of (page$ | async)?.items ?? []; track person.id) {
       <tr>
-        <td>{{ person.firstName }} {{ person.lastName }}</td>
+        <td>{{ person.name.fullName }} </td>
         <td>{{ person.gender | gender }}</td>
         <td>{{ person.birthDate | brDate }}</td>
-        <td style="cursor: pointer;" (click)="goToVaccinationCard(person.id)" >Ver carteirinha</td>
-        <td style="cursor: pointer;" >Excluir</td>
+        <td class="clickable" (click)="goToVaccinationCard(person.id)" >Ver carteirinha</td>
+        <td class="clickable" (click)="onClickDeletePerson(person)" >Excluir</td>
       </tr>
     }
   </tbody>
@@ -28,4 +28,10 @@
   <app-create-person-modal
    (cancel)="showCreatePersonModal = false"
    (created)="onCreate($event)" />
+}
+
+@if (showDeletePersonModal) {
+  <app-delete-person-modal [person]="currentPerson!"
+  (cancel)="showDeletePersonModal = false"
+  (deleted)="onDelete($event)" />
 }

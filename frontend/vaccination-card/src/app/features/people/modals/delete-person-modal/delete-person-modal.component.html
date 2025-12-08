@@ -1,0 +1,7 @@
+
+<app-modal title="Excluir pessoa"
+primaryText="Excluir" secondaryText="Cancelar"
+(close)="cancel.emit()" (secondaryAction)="cancel.emit()"
+(primaryAction)="deletePerson()">
+  <p>Deseja excluir toso os registros de {{ person().name.fullName }}</p>
+</app-modal>

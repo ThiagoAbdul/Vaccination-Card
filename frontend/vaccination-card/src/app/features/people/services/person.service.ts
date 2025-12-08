@@ -23,6 +23,11 @@ export class PersonService {
     return this.http.post<CreatePersonResponse>(this.apiBaseUrl, request)
   }
 
+  deletePerson(personId: string){
+    const endpoint = `${this.apiBaseUrl}/${personId}`
+    return this.http.delete(endpoint)
+  }
+
 
 
 }

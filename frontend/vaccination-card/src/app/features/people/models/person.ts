@@ -2,8 +2,11 @@ import { Gender } from "../enums/gender";
 
 export interface Person {
   id: string,
-  firstName: string,
-  lastName: string,
+  name: {
+    firstName: string,
+    lastName: string,
+    fullName: string,
+  }
   gender: Gender,
   birthDate: string
 }
