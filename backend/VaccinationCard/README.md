@@ -42,6 +42,8 @@
 
 - No decorrer do código, há comentários sobre algumas decisões técnicas.
 
+A API contém swagger UI na rota https://localhost:7223/swagger/index.html
+
 ## Tecnologias
 
 - .NET 10

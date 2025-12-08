@@ -12,6 +12,8 @@
 
 - Embora não foi feito o uso de serviços como AWS Cognito, Azure AD B2C, Keycloack, etc... a roda não foi totalmente reinventada, pois foi utilizado o framework ASP.NET Core Identity.
 
+- A API contém o swagger UI na URL https://localhost:7009/swagger/index.html
+
 ## tecnologias
 
 - .NET 8
