@@ -37,12 +37,29 @@ public class GetVaccinationCardResponseMapper
                             Id = vaccination?.Id,
                             Applied = vaccination is not null,
                             VaccinationDate = vaccination?.VaccinationDate,
-                            Available = v.AllowsDose(dose)
+                            Available = v.AllowsDose(dose),
+                            VaccineId = v.Id
                         };
                     })
                     .ToList()
             })
             .ToList();
+
+        // Vou marcar a vacina faltante
+
+        for(int i = 0; i < vaccines.Count; i++)
+        {
+            foreach(var dose in doseResponses)
+            {
+                var vaccination = dose.Vaccinations[i];
+
+                if (!vaccination.Applied && vaccination.Available)
+                {
+                    vaccination.Absent = true;
+                    break;
+                }
+            }
+        }
 
         return new GetVaccinationCardResponse
         {

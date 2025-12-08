@@ -28,6 +28,8 @@ public class GetVaccinationCardResponse
         public DateOnly? VaccinationDate { get; set; }
         public bool Applied { get; set; }
         public bool Available { get; set; }
+        public bool Absent { get; set; }
+        public Guid VaccineId { get; set; }
 
     }
 
