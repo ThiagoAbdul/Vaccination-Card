@@ -13,12 +13,12 @@
 
 - Utilizei o desenvolvimento orientado a componentes.
 
-# Detalhamento
+## Detalhamento
 - Foi utilizado interceptors para envio de Bearer token de forma automática e comportaamento de refresh token automático.
 
 - O componente app-input tem integração nativa com a api de formulários do Angular, tal prática que adoto no dia a dia para todos os componentes de formulário para fornecer uma interface uniforme e integrada ao framework.
 
-# Pendências
+## Pendências
 
 - Utilizei o desenvolvimento orientado a componentes mas não tanto quanto eu queria, houveram alguns elementos que não pude componentizar, tais como o dropdown e a tabela.
 
