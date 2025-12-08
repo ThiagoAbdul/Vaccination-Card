@@ -14,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using WebAPi.Middlewares;
 namespace WebAPi.Extensions;
 
 public static class DependencyInjection
@@ -96,6 +97,8 @@ public static class DependencyInjection
 
     public static IServiceCollection AddPresentation(this IServiceCollection services, IConfiguration configuration)
     {
+
+        services.AddTransient<ExceptionHandlingMiddleware>();
 
         services.AddEndpointsApiExplorer();
 

@@ -18,10 +18,13 @@
 
 ## Arquitetura
 
-- Não pretendo dividir em muitos serviços para reduzir compexidade, mas creio que separar autenticação e o CRUD de vacinação em serviços diferentes vai ser uma boa separação, pela enorme difeernça de responsabilidade
-- A princípio pensei em utilizar o Cognito, mas como os usuários serão apenas internos (os dados de vacinação não podem ser manipulados por qualquer pessoa), essa lógicas de customizadas de login não são muito simples em serviços como Cognito, Azure B2C (experiência própria nos 2 serviços), então decidi implementar um serviço de autenticação baseado em JWT (não necessariamente Oauth 2.0). Como esse é um case comum, eu já tenho um serviço de autenticação pronto.
-- Para escalabilidade, a arquitetura será stateless, ou seja, não utilizarei sessões (poderia usar no Redis, mas não quero essa complexidade), armazenamento na memória da instância, ou utilizar o appsettings como configurações que podem ser alteradas em runtime.
-- Sem internacionalização, vai ser carteirinha do Brasil
+- Não pretendi dividir o sistema em muitos serviços para evitar complexidade. Porém, separar autenticação, API de CRUD e UI em serviços distintos é uma boa decisão, dado que possuem responsabilidades bastante diferentes.
+
+Inicialmente pensei em utilizar o Amazon Cognito. No entanto, como os usuários serão apenas internos (e os dados de vacinação não podem ser manipulados por qualquer pessoa), a customização dos fluxos de login em serviços como Cognito ou Azure B2C não é tão simples — falo por experiência em ambos. Por isso, optei por implementar um serviço próprio de autenticação baseado em JWT (não necessariamente OAuth 2.0) e reaproveitando as funcionalidades do Microsoft Identity.
+
+Para garantir escalabilidade, a arquitetura será stateless. Ou seja, não utilizarei sessões (apesar de ser possível usar Redis para isso, não quero adicionar essa complexidade). Também não haverá armazenamento em memória local da instância nem dependências de configurações alteráveis via appsettings em runtime.
+
+A solução não terá internacionalização; será focada exclusivamente no contexto brasileiro, como uma carteirinha de vacinação do Brasil (sem traduções).
 
 
 ## Tabelas
@@ -45,12 +48,54 @@
 
 # Padrões
 
-- Vou utilizar Minimal APIs, segundo a Micorosft é mais performático e consome menos recursos do que os Controllers e deve ser utilizado quando for APIs. Mas nada contra Controller
-- Vou usar clean arch, cqrs (não a nível de base de dados, tipo escrever em uma e ler da outra) e mediator para desacoplar, esses 3 casão bem (embora deixem o código bem verboso)
-- Eu gosto do Result Pattern, também deixa verboso mas já li no microsoft learn que exceptions devem ser evitadas pra não degraar a performance da API e manter a semântica, por exemplo, tentar criar um usuário com um email já existente não é uma exception, é uma validação.
-- Task sempre quando possível pra aumentar o throughput da API
-- Repository pattern
-- Repository é complicado, o meu problema com o repository é que o DbContext já é um Repository já implementa Unity of Work, e não acho que ele polui o código. Muitas vezes o Repository pode tirar a flexibilidade, então é legal coisas como passar um IQueryable por parâmetro. Tradeoff, quando o projeto cresce e a gente precisa dar um include e tem 64 repetições de código de chamdas puras do DbContext ou o repetição do IQueryable no repository flexível... Aquele momento que a gente vira evangelista do DRY (Don't repeat yourself) kkk.
-- Gosto de Repository genérico, mas sem forçar um Id do tipo Guid, pois podemos ter entidades com tipos de PK diferentes. => RespositoryBase<T,ID>
-- No começo de todo projeto, Convention Over Configuration é excelente, ams quando a visão do projeto fica mais clara e as regras de negócio começam a mudar, a gente se beneficia mais de um código desacoplado, configurável, coeso, mesmo que seja verboso, wentão vou preferir priorizar controle do que excesso de abstração.
+- Utilizei uma estrutura de pastas baseadas na Clean Architecture, CQRS (não no sentido de separar bancos de leitura e escrita) e apliquei o pattern Mediator para reduzir acoplamento entre as camadas. Esses três padrões se complementam muito bem, apesar de deixarem o código mais verboso, fornecem uma separação maior de responsabilidades no código e mais independência entre as classes.
 
+- Segui o princípio de inversão de dependência (SOLID), fazendo com que as classes dependam apenas das interfaces.
+
+- A inversão de dependência foi muito útil na aplicação dos testes automatizados, que foram essenciais para validar o comportamento das classes, mesmo em "edge cases". Por questões de tempo, não pude cobrir 100% dos testes desejados e foquei apenas nos testes unitários.
+
+- Utilizei o Result Pattern. Embora também aumente a verbosidade, já li no Microsoft Learn que exceções devem ser evitadas quando representam erros esperados, pois podem degradar a performance e prejudicar a semântica. Por exemplo, tentar criar um usuário com um e-mail já existente não é uma exceção — é uma validação.
+
+- Utilizei Task sempre que possível para aumentar o throughput da API evitando operações de IO sícrnonas.
+
+- Feito o uso de ORM, em uma abordagem Code First para uam melhor produtividade e coerência entre o código e as tabelas.
+
+- Migrations foram aplicadas para controlar as versões do schema de dados e tornar o schema facilmente replicável.
+
+- Apliquei o Repository Pattern.
+O ponto crítico aqui é que o próprio DbContext já atua como um repositório e implementa Unit of Work. As vezes abstrair com um repository pode até reduzir flexibilidade (dependendo da implementação). 
+É um trade-off: Ao usar o DbContext direto, quando o projeto cresce, surgem múltiplas repetições de código, dificultando a manutenção ao precisar alterar alguma query (por exemplo, ter que cassar todas as queries para uma entidade porque precisará de um Include).
+
+- Utilizei repositórios genéricos, mas sem forçar o tipo Guid como chave primária. Podemos ter entidades com PKs diferentes. Portanto, a estrutura que eu tuilizei foi:
+RepositoryBase<T, Id>.
+
+- Utilizei o Fluent Validation, para agrupar as validações sem poluir o código. O .NET 10 fornece melhorias em relação as validaçoes nativascom Data Annotations, mas não achei o flexível o suficiente para substituir o Fluent Validation.
+
+- Tanto para o Fluent Validation quanto ao Mediator, utilizei DI automática a partir do assembly do projeto Application (para não poluir o código da classe DependecyInjection)
+
+- Foi feito o uso de DTOs para separar as entidades do domínio e os retornos dos endpoints.
+
+- As rotas da API seguem o padão REST.
+
+- No início de qualquer projeto, Convention Over Configuration é ótimo. Mas conforme o domínio fica mais claro e as regras de negócio começam a mudar, passamos a nos beneficiar mais de um código desacoplado, configurável e coeso, ainda que verboso. Então, neste projeto, vou priorizar controle e clareza em vez de camadas de abstração excessivas.
+
+
+
+
+# Detalhamento
+
+- Utilizarei Minimal APIs. Segundo a Microsoft, elas são mais performáticas e consomem menos recursos do que Controllers, sendo recomendadas para APIs. 
+
+- O Swagger foi utilizado
+
+- Utilizei um hash determinístico para o CPF e para o RG, a idéia é salvar esses dados criptografados ma saina permitir buscas por esses valores.
+
+- Utilizei um log estruturado em JSON e inclui o comportamento de log nas requisições e nas operações de base de dados (inteceptors). O Log em JSON facilita a busca estrutura em platatormas como Cloud Watch Logs, Azure Monitor, EKS, etc...
+
+- Utilizei um interceptor de Auditoria, que utiliza reflection e o contexto da requisição para logar as mudanças na entidade (estado atual e estado anterior), ip do usuário, operação realizada, entre outros detalhes. Por ser uma informação semi estruturada, o resultado está a ser enviado a uma fila "mockada" (possivelmente um consumidor salvaria em um MongoDB).
+
+- As respostas da API utilizam o seu devido status code e os erros são estruturados em um JSON padrão (para facilitar para o front), com detalhes do ocorrido (sem expor brechas).
+
+- Foi utilizado um tratador global de exceção para evitar que exceções retornem ao usuário sem nenhum tratamento.
+
+- O algoritmo principal está na classe GetVaccinationCardResponseMapper, que transforma as Vacinações de uma pessoa em uma matriz que representa o cartão de vacinação.

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using WebAPi.Endpoints;
 using WebAPi.Extensions;
+using WebAPi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,7 @@ builder.Services.AddHealthChecks();
 var app = builder.Build();
 
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
@@ -39,12 +41,14 @@ app.UseHttpsRedirection();
 
 app.UseHealthChecks("/health");
 
+app.UseSerilogRequestLogging();
+
+
 app.UseCors("DefaultPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseSerilogRequestLogging();
 
 app
     .MapPersonEndpoints()
