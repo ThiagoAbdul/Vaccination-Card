@@ -3,26 +3,26 @@ import { VaccinationDoseType } from "../enums/vaccination-dose-type";
 
 export interface VaccinationCard {
   vaccines: VaccineDetails[];
-  person: PersonDetails
+  person: PersonDetails,
+  doses: DoseDetails[]
 }
 
 export interface VaccineDetails {
   id: string;
   name: string;
-  doses: DoseDetails[];
 }
 
 export interface DoseDetails {
-  available: boolean;
   type: VaccinationDoseType;
   doseNumber: number;
-  vaccination: VaccinationDetails
+  vaccinations: VaccinationDetails[]
 }
 
 export interface VaccinationDetails {
   id?: string;
   vaccinationDate?: string;
   applied: boolean;
+  available: boolean
 }
 
 export interface PersonDetails {

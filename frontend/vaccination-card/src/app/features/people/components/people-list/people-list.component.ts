@@ -41,7 +41,7 @@ export class PeopleListComponent {
   }
 
   goToVaccinationCard(personId: string){
-    this.router.navigate(["vacinacao", "carteirinha", personId])
+    this.router.navigate(["vacinacao", "cartao", personId])
   }
 
 }

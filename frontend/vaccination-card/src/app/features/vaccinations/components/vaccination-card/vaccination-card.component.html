@@ -1,7 +1,43 @@
 <h1>Carteirinha de vacinação</h1>
 
 <form [formGroup]="form">
-  <app-input formControlName="name"  readOnly label="Nome" />
+  <app-input formControlName="name" readOnly label="Nome" />
   <app-input formControlName="age" readOnly label="Idade" />
   <app-input formControlName="gender" readOnly label="Sexo" />
 </form>
+
+<div class="vaccination-card">
+  @if (vaccinationcard) {
+  <table>
+    <thead>
+      <tr>
+        <th>Dose</th>
+        @for (vaccine of vaccinationcard.vaccines; track vaccine.id) {
+          <th>{{ vaccine.name }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (dose of vaccinationcard.doses; track $index) {
+        <tr>
+          <td>{{ dose | vaccinationDose }}</td>
+          @for (vaccination of dose.vaccinations; track $index) {
+            @if (vaccination.available) {
+              @if (vaccination.applied) {
+                <td>{{ vaccination.vaccinationDate | brDate}}</td>
+              }
+              @else {
+                <td></td>
+              }
+            }
+            @else {
+              <td [ngStyle]="{ backgroundColor: 'grey' }">N/A</td>
+            }
+
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+  }
+</div>

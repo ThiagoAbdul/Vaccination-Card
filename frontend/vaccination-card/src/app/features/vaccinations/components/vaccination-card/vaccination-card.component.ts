@@ -8,11 +8,13 @@ import { LoaderService } from '../../../../shared/services/loader.service';
 import { finalize } from 'rxjs';
 import { dateToAge, isoStringToDate } from '../../../../shared/utils/date-utils';
 import { GenderPipe } from '../../../people/pipes/gender.pipe';
+import { BrazillianFormatDate } from '../../../../shared/pipes/brazillian-format-date.pipe';
+import { VaccinationDosePipe } from '../../pipes/vaccination-dose.pipe';
 
 @Component({
   selector: 'app-vaccination-card',
   standalone: true,
-  imports: [SharedModule, FormsModule, ReactiveFormsModule, GenderPipe],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, VaccinationDosePipe ],
   templateUrl: './vaccination-card.component.html',
   styleUrl: './vaccination-card.component.scss',
   providers: [GenderPipe]

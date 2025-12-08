@@ -3,6 +3,6 @@ import { VaccinationCardComponent } from "./components/vaccination-card/vaccinat
 
 
 export const vaccinationRoutes: Routes = [
-      { path: "carteirinha/:personId", component: VaccinationCardComponent }
+      { path: "cartao/:personId", component: VaccinationCardComponent }
 ]
 
