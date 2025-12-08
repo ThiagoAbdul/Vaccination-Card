@@ -136,6 +136,9 @@
   <data name="InvalidRequest" xml:space="preserve">
     <value>Requisição inválida</value>
   </data>
+  <data name="InvalidVaccinationDate" xml:space="preserve">
+    <value>A data da dose da vacinação não pode menor do que a anterior</value>
+  </data>
   <data name="PageSizeCannotBeNegative" xml:space="preserve">
     <value>Tamanho da página não pode ser negativo</value>
   </data>
@@ -152,7 +155,7 @@
     <value>Pessoa não encontrada</value>
   </data>
   <data name="VaccinationCannotBeInFuture" xml:space="preserve">
-    <value>data de vacinação não pode ser maior que a data atual</value>
+    <value>Data de vacinação não pode ser maior que a data atual</value>
   </data>
   <data name="VaccinationDoseIsWrong" xml:space="preserve">
     <value>Dose da vacinação incorreta. Consulte a carteirinha de vacinação</value>

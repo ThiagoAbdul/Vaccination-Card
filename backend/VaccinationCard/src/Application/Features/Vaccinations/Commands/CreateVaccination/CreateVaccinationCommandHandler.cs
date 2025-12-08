@@ -71,6 +71,12 @@ public class CreateVaccinationCommandHandler(IPersonRepository personRepository,
         if (expectedNextDose != candidateDose)
             return Result.Failure(Messages.VaccinationDoseIsWrong, ResultStatus.Validation);
 
+        // 5. Verificar a data da dose
+        if(previousVaccination.VaccinationDate >= request.VaccinationDate)
+        {
+            return Result.Failure(Messages.InvalidVaccinationDate, ResultStatus.Validation);
+        }
+
         return Result.Success();
     }
 

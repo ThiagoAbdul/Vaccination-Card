@@ -124,6 +124,33 @@ public class CreateVaccinationCommandHandlerTests
     }
 
 
+    [Fact]
+    public async Task ValidateDoseAsync_InvalidVaccinationDate_ReturnsFailure()
+    {
+        var vaccine = new Vaccine { Doses = 3 };
+
+        var previous = new Vaccination
+        {
+            Dose = new VaccinationDose(VaccineDoseType.Primary, 1),
+            VaccinationDate = new DateOnly(2025, 01, 10)
+        };
+
+        var command = new CreateVaccinationCommand
+        {
+            DoseType = VaccineDoseType.Primary,
+            DoseNumber = 2,
+            VaccinationDate = new DateOnly(2025, 01, 10) // <= mesma data -> deve falhar
+        };
+
+        _vaccinationRepositoryMock
+            .Setup(r => r.GetLastVaccinationByPersonAndVaccine(It.IsAny<Guid>(), It.IsAny<Guid>()))
+            .ReturnsAsync(previous);
+
+        var result = await _commandHandler.ValidateDoseAsync(vaccine, command);
+
+        Assert.False(result.IsSuccess);
+        Assert.Equal(Messages.InvalidVaccinationDate, result.Error.Message);
+    }
 
 
 
