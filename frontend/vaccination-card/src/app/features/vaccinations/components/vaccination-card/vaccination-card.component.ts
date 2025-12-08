@@ -12,11 +12,12 @@ import { BrazillianFormatDate } from '../../../../shared/pipes/brazillian-format
 import { VaccinationDosePipe } from '../../pipes/vaccination-dose.pipe';
 import { CreateVaccinationModalComponent } from '../../modals/create-vaccination-modal/create-vaccination-modal.component';
 import { CreateVaccinationResponse } from '../../models/create-vaccination-response';
+import { DeleteVaccinationModalComponent } from '../../modals/delete-vaccination-modal/delete-vaccination-modal.component';
 
 @Component({
   selector: 'app-vaccination-card',
   standalone: true,
-  imports: [SharedModule, FormsModule, ReactiveFormsModule, VaccinationDosePipe, CreateVaccinationModalComponent ],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, VaccinationDosePipe, CreateVaccinationModalComponent, DeleteVaccinationModalComponent ],
   templateUrl: './vaccination-card.component.html',
   styleUrl: './vaccination-card.component.scss',
   providers: [GenderPipe]
@@ -29,7 +30,9 @@ export class VaccinationCardComponent {
   private loaderService = inject(LoaderService)
   private genderPipe = inject(GenderPipe)
   protected showCreateVaccinationModal = false
+  protected showDeleteVaccinationModal = false
   protected currentVaccineId?: string
+  protected currentVaccinationId?: string
   protected personId!: string
   
   form = new FormGroup({
@@ -73,8 +76,19 @@ export class VaccinationCardComponent {
     this.currentVaccineId = undefined
     alert("Vacinação cadastrada")
     this.loadVaccinationCard()
-    
+  
+  }
 
+  onClickInVaccination(vaccinationId: string){
+    this.currentVaccinationId = vaccinationId
+    this.showDeleteVaccinationModal = true
+  }
+
+  onDeleted(){
+    this.showDeleteVaccinationModal = false
+    this.currentVaccinationId = undefined
+    alert("Vacinação excluída")
+    this.loadVaccinationCard()
   }
 
 }

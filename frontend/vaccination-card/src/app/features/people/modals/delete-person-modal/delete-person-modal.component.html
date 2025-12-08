@@ -3,5 +3,5 @@
 primaryText="Excluir" secondaryText="Cancelar"
 (close)="cancel.emit()" (secondaryAction)="cancel.emit()"
 (primaryAction)="deletePerson()">
-  <p>Deseja excluir toso os registros de {{ person().name.fullName }}</p>
+  <p>Deseja excluir todos os registros de {{ person().name.fullName }}?</p>
 </app-modal>

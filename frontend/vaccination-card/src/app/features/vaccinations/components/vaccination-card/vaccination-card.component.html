@@ -24,10 +24,14 @@
           @for (vaccination of dose.vaccinations; track $index) {
             @if (vaccination.available) {
               @if (vaccination.applied) {
-                <td class="clickable">{{ vaccination.vaccinationDate | brDate}}</td>
+                <td class="clickable"  (click)="onClickInVaccination(vaccination.id!)">
+                  {{ vaccination.vaccinationDate | brDate}} <img src="/assets/icons/trash_red.svg">
+                </td>
               }
               @else if(vaccination.absent) {
-                <td (click)="onClickVaccineAbsent(vaccination.vaccineId)" class="clickable" >Faltoso</td>
+                <td (click)="onClickVaccineAbsent(vaccination.vaccineId)" class="clickable" >
+                  Faltoso <img src="/assets/icons/add_circle.svg">
+                </td>
               }
               @else {
                 <td></td>
@@ -49,4 +53,10 @@
   <app-create-vaccination-modal [personId]="personId" [vaccineId]="currentVaccineId!"
   (cancel)="showCreateVaccinationModal = false"
   (created)="onCreate($event)" />
+}
+
+@if (showDeleteVaccinationModal) {
+  <app-delete-vaccination-modal [vaccinationId]="currentVaccinationId!"
+  (cancel)="showDeleteVaccinationModal = false"
+  (deleted)="onDeleted()" />
 }

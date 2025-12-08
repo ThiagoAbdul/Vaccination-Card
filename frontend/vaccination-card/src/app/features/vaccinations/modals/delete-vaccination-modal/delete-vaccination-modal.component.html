@@ -1,0 +1,6 @@
+<app-modal title="Excluir registro de vacinação"
+primaryText="Excluir" secondaryText="Cancelar"
+(close)="cancel.emit()" (secondaryAction)="cancel.emit()"
+(primaryAction)="deleteVaccination()">
+  <p>Deseja excluir o registro de vacinaçao?</p>
+</app-modal>

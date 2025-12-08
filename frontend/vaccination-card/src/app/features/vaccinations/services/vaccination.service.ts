@@ -21,4 +21,9 @@ export class VaccinationService {
   createVaccination(request: CreateVaccinationRequest){
     return this.http.post<CreateVaccinationResponse>(this.apiBaseUrl, request)
   }
+
+  deleteVaccination(vaccinationId: string){
+    const endpoint = `${this.apiBaseUrl}/${vaccinationId}`
+    return this.http.delete(endpoint)
+  }
 }
