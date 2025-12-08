@@ -28,7 +28,7 @@ public static class VaccinationEndpoints
         .AddValidation<CreateVaccinationCommand>()
         .Produces<CreateVaccinationResponse>(201);
 
-        group.MapGet("/person/{personId}/vaccination-card", async ([FromRoute] Guid personId, [FromServices] IMediator mediator) =>
+        group.MapGet("/people/{personId}/vaccination-card", async ([FromRoute] Guid personId, [FromServices] IMediator mediator) =>
         {
             var result = await mediator.Send(new GetVaccinationCardQuery(personId));
 

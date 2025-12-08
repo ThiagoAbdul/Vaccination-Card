@@ -7,6 +7,17 @@ public class Name
 
     public string FullName => $"{FirstName} {LastName}";
 
+    public Name()
+    {
+        
+    }
+
+    public Name(string firstName, string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+    }
+
     public bool IsValid()
     {
         if (string.IsNullOrWhiteSpace(FirstName)) return false;

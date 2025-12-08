@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Options;
+using System.Security.Claims;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -49,19 +50,21 @@ public class AuditInterceptor(IHttpContextAccessor httpContextAccessor, IMessage
 
         List<AuditLog> logs = new (entries.Count());
 
+        string? name = httpContextAccessor.HttpContext?.User.FindFirstValue("sub");
+
         foreach ( var entry in entries )
         {
             if(entry.State is EntityState.Added)
             {
                 entry.Entity.CreatedAt = DateOnly.FromDateTime(DateTime.Now);
                 entry.Entity.CreatedById = null; // TODO
-                entry.Entity.CreatedByName = null; // TODO
+                entry.Entity.CreatedByName = name; // TODO
             }
             else
             {
                 entry.Entity.LastUpdatedAt = DateOnly.FromDateTime(DateTime.Now);
                 entry.Entity.LastUpdatedById = null; // TODO
-                entry.Entity.LastUpdatedByName = null; // TODO
+                entry.Entity.LastUpdatedByName = name; // TODO
             }
 
             var log = GetAuditLog(entry);

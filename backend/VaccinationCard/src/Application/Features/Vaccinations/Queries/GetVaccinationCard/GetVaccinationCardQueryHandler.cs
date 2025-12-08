@@ -23,7 +23,7 @@ public class GetVaccinationCardQueryHandler(IVaccineRepository vaccineRepository
         var vaccinesWithVaccinations = await vaccineRepository
             .GetAllVaccinesWithVaccinationsForPersonAsync(request.PersonId);
 
-        return GetVaccinationCardResponseMapper.Map(vaccinesWithVaccinations);
+        return GetVaccinationCardResponseMapper.Map(vaccinesWithVaccinations, person);
         
     }
 }
