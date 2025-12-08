@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { VaccineService } from '../services/vaccine.service';
+import { VaccineService } from '../../services/vaccine.service';
 import { delay, finalize, Observable } from 'rxjs';
-import { Vaccine } from '../models/vaccine';
+import { Vaccine } from '../../models/vaccine';
 import { AsyncPipe } from '@angular/common';
-import { LoaderService } from '../../../shared/services/loader.service';
-import { ButtonComponent } from "../../../ui/components/button/button.component";
-import { CreateVaccineModalComponent } from '../modals/create-vaccine-modal/create-vaccine-modal.component';
-import { CreateVaccineResponse } from '../models/create-vaccine-response';
+import { LoaderService } from '../../../../shared/services/loader.service';
+import { ButtonComponent } from "../../../../ui/components/button/button.component";
+import { CreateVaccineModalComponent } from '../../modals/create-vaccine-modal/create-vaccine-modal.component';
+import { CreateVaccineResponse } from '../../models/create-vaccine-response';
 
 @Component({
   selector: 'app-vaccine-list',

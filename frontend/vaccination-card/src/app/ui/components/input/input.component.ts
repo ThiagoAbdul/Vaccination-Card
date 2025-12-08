@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, input, output } from '@angular/core';
+import { booleanAttribute, Component, ElementRef, inject, input, output } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NgControl } from '@angular/forms';
 
 @Component({
@@ -15,7 +15,7 @@ export class InputComponent implements ControlValueAccessor {
   protected value: string = ""
   label = input<string>()
   placeholder = input("", { transform: (value: string | undefined) => value || "" })
-  readOnly = input(false)
+  readOnly = input(false, { transform: booleanAttribute })
   type = input<string>()
   private ngControl = inject(NgControl, { optional: true })
 

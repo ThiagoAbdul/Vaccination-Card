@@ -17,8 +17,8 @@
         <td>{{ person.firstName }} {{ person.lastName }}</td>
         <td>{{ person.gender | gender }}</td>
         <td>{{ person.birthDate | brDate }}</td>
-        <td>Ver carteirinha</td>
-        <td>Excluir</td>
+        <td style="cursor: pointer;" (click)="goToVaccinationCard(person.id)" >Ver carteirinha</td>
+        <td style="cursor: pointer;" >Excluir</td>
       </tr>
     }
   </tbody>
