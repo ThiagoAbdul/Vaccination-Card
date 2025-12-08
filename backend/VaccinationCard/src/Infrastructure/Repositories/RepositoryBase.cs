@@ -30,5 +30,10 @@ public abstract class RepositoryBase<T, ID>(AppDbContext db) : IRepositoryBase<T
         return _dbSet.ToListAsync();
     } 
 
+    public async Task UpdateRangeAsync(IEnumerable<T> entities)
+    {
+        _dbSet.UpdateRange(entities);
+    }
+
 
 }

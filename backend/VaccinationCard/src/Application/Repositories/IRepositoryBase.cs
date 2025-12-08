@@ -8,4 +8,5 @@ public interface IRepositoryBase<T, ID>
     Task<List<T>> GetAllAsync(); // Em raríssimos casos e ainda com filtro de quem está deletado
     Task<T?> GetByIdAsync(ID id);
     Task SaveChangesAsync();
+    Task UpdateRangeAsync(IEnumerable<T> entities);
 }

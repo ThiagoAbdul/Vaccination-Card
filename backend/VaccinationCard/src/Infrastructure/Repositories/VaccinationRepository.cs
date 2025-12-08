@@ -19,10 +19,17 @@ public class VaccinationRepository(AppDbContext db) : RepositoryBase<Vaccination
             .FirstOrDefault(); // Sobrecarga da ordenação, pois Vaccination : IComparable
     }
 
-    public async Task DeleteAsync(Guid vaccinationId)
+    public async Task DeleteAsync(Vaccination vaccination)
     {
-        await _dbSet.Where(x => x.Id == (vaccinationId))
-            .ExecuteUpdateAsync(setter => setter.SetProperty(x => x.IsDeleted, true));
+        _db.Attach(vaccination);
+        vaccination.IsDeleted = true;
+    }
+
+    public Task<List<Vaccination>> GetSubsequentVaccinationsAsync(Guid personId, Guid vaccineId, DateOnly date)
+    {
+        return _dbSet
+            .Where(x => x.PersonId == personId && x.VaccineId == vaccineId && x.VaccinationDate > date)
+            .ToListAsync();
     }
 
 }
