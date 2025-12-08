@@ -10,24 +10,29 @@ import { dateToAge, isoStringToDate } from '../../../../shared/utils/date-utils'
 import { GenderPipe } from '../../../people/pipes/gender.pipe';
 import { BrazillianFormatDate } from '../../../../shared/pipes/brazillian-format-date.pipe';
 import { VaccinationDosePipe } from '../../pipes/vaccination-dose.pipe';
+import { CreateVaccinationModalComponent } from '../../modals/create-vaccination-modal/create-vaccination-modal.component';
+import { CreateVaccinationResponse } from '../../models/create-vaccination-response';
 
 @Component({
   selector: 'app-vaccination-card',
   standalone: true,
-  imports: [SharedModule, FormsModule, ReactiveFormsModule, VaccinationDosePipe ],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, VaccinationDosePipe, CreateVaccinationModalComponent ],
   templateUrl: './vaccination-card.component.html',
   styleUrl: './vaccination-card.component.scss',
   providers: [GenderPipe]
 })
 export class VaccinationCardComponent {
-
+  
   protected vaccinationcard?: VaccinationCard
   private vaccinationService = inject(VaccinationService)
   private route = inject(ActivatedRoute)
   private loaderService = inject(LoaderService)
   private genderPipe = inject(GenderPipe)
-
-    form = new FormGroup({
+  protected showCreateVaccinationModal = false
+  protected currentVaccineId?: string
+  protected personId!: string
+  
+  form = new FormGroup({
     name: new FormControl(""),
     gender: new FormControl(""),
     age: new FormControl(""),
@@ -35,9 +40,15 @@ export class VaccinationCardComponent {
 
   constructor(){
     this.route.params.subscribe(params => {
-      const personId = params["personId"]
-      this.loaderService.displayLoading()
-      this.vaccinationService.getVaccinationCard(personId)
+      this.personId = params["personId"]
+      this.loadVaccinationCard()
+      
+    })
+  }
+
+  loadVaccinationCard(){
+    this.loaderService.displayLoading()
+      this.vaccinationService.getVaccinationCard(this.personId)
       .pipe(finalize(() => this.loaderService.hideLoading()))
       .subscribe({
         next: response => {
@@ -50,8 +61,20 @@ export class VaccinationCardComponent {
           })
         }
       })
-    })
   }
 
+  onClickVaccineAbsent(vaccineId: string){
+    this.showCreateVaccinationModal = true
+    this.currentVaccineId = vaccineId
+  }
+
+  onCreate(response: CreateVaccinationResponse){
+    this.showCreateVaccinationModal = false
+    this.currentVaccineId = undefined
+    alert("Vacinação cadastrada")
+    this.loadVaccinationCard()
+    
+
+  }
 
 }

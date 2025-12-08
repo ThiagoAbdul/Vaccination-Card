@@ -22,7 +22,9 @@ export interface VaccinationDetails {
   id?: string;
   vaccinationDate?: string;
   applied: boolean;
-  available: boolean
+  available: boolean;
+  absent: boolean,
+  vaccineId: string
 }
 
 export interface PersonDetails {

@@ -1,0 +1,29 @@
+<app-modal title="Registrar vacinação"
+  (close)="cancel.emit()"
+  (secondaryAction)="cancel.emit()"
+  (primaryAction)="createVaccination()"
+  primaryText="Registrar"
+  secondaryText="Cancelar">
+
+  <form [formGroup]="form">
+
+    <app-input
+      formControlName="vaccinationDate"
+      type="date"
+      label="Data da vacinação">
+    </app-input>
+
+    <label>Tipo de dose</label>
+    <select formControlName="doseType">
+      <option [ngValue]="0">Dose primária</option>
+      <option [ngValue]="1">Dose reforço</option>
+  </select>
+
+    <app-input
+      formControlName="doseNumber"
+      type="number"
+      label="Número da dose">
+    </app-input>
+
+  </form>
+</app-modal>
