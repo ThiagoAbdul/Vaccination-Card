@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,10 +14,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddIdentityApiEndpoints<IdentityUser>(options =>
 {
-    // Configurações de segurança da senha
+    
     builder.Configuration.GetSection("IdentityOptions").Bind(options);
 })
-    .AddRoles<IdentityRole>() // <-- HABILITA ROLES (Funções)
+    .AddRoles<IdentityRole>() 
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllers();
@@ -27,7 +26,6 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Auth Service", Version = "v1" });
 
-    // Define o esquema de segurança (Security Scheme)
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -38,7 +36,6 @@ builder.Services.AddSwaggerGen(c =>
         Description = "Insira o token JWT no campo 'Value' no formato: Bearer [seu_token]"
     });
 
-    // Define o Requisito de Segurança (Security Requirement)
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -73,7 +70,6 @@ builder.Services.AddCors(options =>
         });
 });
 
-// Carrega as configurações JWT
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!));
 
@@ -84,7 +80,6 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
-    // A chave que será usada para VALIDAR a assinatura do token
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
@@ -103,7 +98,6 @@ builder.Services.AddAuthentication(options =>
 
 });
 
-// A autorização padrão é necessária
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("Invite", policy =>
@@ -114,9 +108,16 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
-// Configuração do pipeline HTTP.
 if (app.Environment.IsDevelopment())
 {
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        db.Database.Migrate();
+    }
+
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -130,7 +131,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// --- 4. SEEDING DE ROLES E USUÁRIOS (Opcional, para testes) ---
 using (var scope = app.Services.CreateScope())
 {
     var serviceProvider = scope.ServiceProvider;
@@ -143,7 +143,6 @@ using (var scope = app.Services.CreateScope())
 app.Run();
 
 
-// Método para criar roles e um usuário inicial
 async Task SeedRolesAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
 {
     string[] roleNames = { "Admin", "User" };
@@ -170,8 +169,7 @@ public class TokenResponse
 // Models/RegisterModel.cs
 public class RegisterUserRequest : LoginRequest // Herda Email e Password
 {
-    // Apenas para exemplo, o Identity pode ter mais campos.
-    // public string NomeCompleto { get; set; } = string.Empty;
+
 }
 
 // Classe de Request para o body do endpoint

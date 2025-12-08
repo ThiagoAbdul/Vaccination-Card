@@ -1,3 +1,5 @@
+using Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using WebAPi.Endpoints;
 using WebAPi.Extensions;
@@ -17,8 +19,18 @@ builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
+
+
 if (app.Environment.IsDevelopment())
 {
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        db.Database.Migrate();
+    }
+
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }
