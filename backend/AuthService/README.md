@@ -31,3 +31,12 @@
 - A API pode ser executada pelo dotnet cli utilizando o comando ```dotnet run --project AuthService --launch-profile https```
 
 - As migrations serão aplicadas automaticamente (apenas porque é ambiente de Dev)
+
+- Ao abrir o swagger (rota /swagger), deverá ser executado o endpoint POST /api/Auth/register-root-user, criando o usuário root.
+
+```
+    {
+    "email": "admin@email.com",
+    "password": "SHjhjehdfd@12fwfl"
+    }
+```

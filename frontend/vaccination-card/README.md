@@ -29,9 +29,13 @@
 - Oa textos ficaram hardcoded, ainda que não tenha tradução, acho uma boa prática deixar as strings centralizadas em um arquivo.
 
 ## Setup
+- Executar ```npm i``` para instalar as dependências.
+- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
+- Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## UI
+
+![Cartão de vacinação](vaccination-card.png)
 
 
 
